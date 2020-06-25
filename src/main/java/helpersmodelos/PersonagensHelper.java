@@ -22,6 +22,7 @@ import javax.faces.bean.ViewScoped;
 @Named
 @ViewScoped
 public class PersonagensHelper implements Serializable {
+    
     private Session session = null;
     
     public PersonagensHelper(){
@@ -34,6 +35,7 @@ public class PersonagensHelper implements Serializable {
     public ArrayList<Personagens> getPersonagemPrincipal(){
         ArrayList<Personagens> chars = null;
         try{
+            session.beginTransaction();
             Query q = session.createQuery("from Personagens as char  where char.nome = 'Jin'");
             chars = (ArrayList<Personagens>) q.list();
         }catch(Exception e){
@@ -42,9 +44,23 @@ public class PersonagensHelper implements Serializable {
         if(chars == null)
             return chars;
         else
-            return (ArrayList<Personagens>)chars.clone();
+            return chars;
     }
     
+    public ArrayList<Personagens> getListaPersonagens(){
+        ArrayList<Personagens> chars = null;
+        try{
+            session.beginTransaction();
+            Query q = session.createQuery("from Personagens");
+            chars = (ArrayList<Personagens>) q.list();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        if(chars == null)
+            return chars;
+        else
+            return chars;
+    }
     
     
 }

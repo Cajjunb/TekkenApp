@@ -10,7 +10,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" > </meta>
     </h:head>
     <h:body>
-        <h:outputText value="HELLO" />
-        <h:outputText value="#{beanIndex.charPrincipal.nome}" />
+        <p:dataTable var="personagem" value="#{beanIndex.listaChar}">
+            <p:column headerText="Id" >
+                <h:outputText value="#{personagem.id}" />
+            </p:column>
+            <p:column headerText="Nome" >
+                <h:outputText value="#{personagem.nome}" />
+            </p:column>
+            <p:column headerText="Foto">
+                <h:outputText value="#{personagem.fotoUrl}" />
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>
