@@ -41,6 +41,6 @@ public class CharsTest extends TestCase{
     // The methods must be annotated with annotation @Test. For example:
     // @Test
     public void testeTeste() {
-        
+        assertEquals(true,true);
     }
 }
