@@ -4,7 +4,9 @@ import helpersmodelos.PersonagensHelper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import modelos.Personagens;
@@ -25,22 +27,25 @@ public class beanIndex implements Serializable {
     @Inject
     private PersonagensHelper helpChars ;
 
-    public ArrayList<Personagens> getListaChar() {
-        return listaChar;
-    }
-
-    public void setListaChar(ArrayList<Personagens> listaChar) {
-        this.listaChar = listaChar;
-    }
     private Personagens charPrincipal;
     private ArrayList<Personagens> listaChar;
     
     
     @PostConstruct
     public void init(){
-        this.listaChar = helpChars.getListaPersonagens();
+        this.listaChar = this.helpChars.getListaPersonagens();
     }
 
+    public void salvaPersonagem(Personagens registro){
+        if (this.helpChars.salvaPersonagem(registro))
+            FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Personagem Salvo!", "")) ;
+        else
+            FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro!", "Personagem não foi alterado!")) ;
+    }
+    
+    //GETTERS E SETTERS
     public PersonagensHelper getHelpChars() {
         return helpChars;
     }
@@ -57,5 +62,11 @@ public class beanIndex implements Serializable {
         this.charPrincipal = charPrincipal;
     }
     
-    
+    public ArrayList<Personagens> getListaChar() {
+        return listaChar;
+    }
+
+    public void setListaChar(ArrayList<Personagens> listaChar) {
+        this.listaChar = listaChar;
+    }
 }

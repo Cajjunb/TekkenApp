@@ -53,6 +53,7 @@ Contributor(s):
     <!-- Update database on startup -->
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="modelos/Golpes.hbm.xml"/>
     <mapping resource="modelos/Personagens.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

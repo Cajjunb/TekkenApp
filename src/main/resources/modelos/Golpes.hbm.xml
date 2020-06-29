@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/06/2020 16:59:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Golpes" table="golpes" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="personagem" class="modelos.Personagens" fetch="select" >
+            <column name="fk_id_char"></column>
+        </many-to-one>
+        <property name="nomeGolpe" type="string">
+            <column name="nome" length="50" not-null="true" />
+        </property>
+        <property name="input" type="string">
+            <column name="input" length="300" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

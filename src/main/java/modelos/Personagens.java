@@ -1,6 +1,7 @@
 package modelos;
 // Generated 24/06/2020 16:59:01 by Hibernate Tools 4.3.1
 
+import java.util.Set;
 
 
 /**
@@ -12,6 +13,7 @@ public class Personagens  implements java.io.Serializable {
      private int id;
      private String  nome;
      private String fotoUrl;
+     private Set<Golpes> golpes;
 
     public Personagens() {
     }
@@ -47,6 +49,14 @@ public class Personagens  implements java.io.Serializable {
     
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
+    }
+
+    public Set<Golpes> getGolpes() {
+        return golpes;
+    }
+
+    public void setGolpes(Set<Golpes> golpes) {
+        this.golpes = golpes;
     }
 
 

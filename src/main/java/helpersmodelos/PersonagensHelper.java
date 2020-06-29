@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import utilidades.HibernateUtil;
 import org.hibernate.Session;
 import javax.faces.bean.ViewScoped;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.faces.bean.ViewScoped;
 public class PersonagensHelper implements Serializable {
     
     private Session session = null;
+    private  Transaction transacao = null;
     
     public PersonagensHelper(){
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -50,7 +52,8 @@ public class PersonagensHelper implements Serializable {
     public ArrayList<Personagens> getListaPersonagens(){
         ArrayList<Personagens> chars = null;
         try{
-            session.beginTransaction();
+            if(this.transacao == null)
+                this.transacao = session.beginTransaction();
             Query q = session.createQuery("from Personagens");
             chars = (ArrayList<Personagens>) q.list();
         }catch(Exception e){
@@ -62,5 +65,18 @@ public class PersonagensHelper implements Serializable {
             return chars;
     }
     
+    public boolean salvaPersonagem(Personagens registro){
+        boolean resultado = false;
+        try{
+            if(this.transacao == null)
+                this.transacao = session.beginTransaction();
+            session.persist(registro);
+            resultado = true;
+            transacao.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultado;
+    }
     
 }
