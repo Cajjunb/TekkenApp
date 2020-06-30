@@ -36,6 +36,11 @@ public class beanIndex implements Serializable {
         this.listaChar = this.helpChars.getListaPersonagens();
     }
 
+    
+    /**
+     * Ouvidor do Evento Cell EDIT
+     * @param registro 
+     */
     public void salvaPersonagem(Personagens registro){
         if (this.helpChars.salvaPersonagem(registro))
             FacesContext.getCurrentInstance().
