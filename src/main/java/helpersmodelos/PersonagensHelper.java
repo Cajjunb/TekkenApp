@@ -78,5 +78,23 @@ public class PersonagensHelper implements Serializable {
         }
         return resultado;
     }
+    /**
+     * Helper que usa o hibernate para salvar um registro 
+     * @param registro
+     * @return 
+     */
+    public boolean salvaPersonagemNovo(Personagens registro){
+        boolean resultado = false;
+        try{
+            if(this.transacao == null)
+                this.transacao = session.beginTransaction();
+            session.save(registro);
+            resultado = true;
+            transacao.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultado;
+    }
     
 }

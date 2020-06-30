@@ -23,6 +23,10 @@ public class Personagens  implements java.io.Serializable {
        this.nome = nome;
        this.fotoUrl = fotoUrl;
     }
+    
+    public Personagens(String nome){
+        this.nome = nome;
+    }
 
     @Override
     public String toString() {

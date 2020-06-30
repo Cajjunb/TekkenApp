@@ -26,17 +26,16 @@ import modelos.Personagens;
 public class beanIndex implements Serializable {
     @Inject
     private PersonagensHelper helpChars ;
-
     private Personagens charPrincipal;
     private ArrayList<Personagens> listaChar;
-    
+    private Personagens personagemNovo;
     
     @PostConstruct
     public void init(){
         this.listaChar = this.helpChars.getListaPersonagens();
+        this.personagemNovo = new Personagens() ;
     }
 
-    
     /**
      * Ouvidor do Evento Cell EDIT
      * @param registro 
@@ -48,6 +47,28 @@ public class beanIndex implements Serializable {
         else
             FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro!", "Personagem não foi alterado!")) ;
+    }
+    
+    
+    public boolean criaChar(){
+        if(this.personagemNovo.getNome() != null){
+            FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"TENTANDO!", 
+                        this.personagemNovo.getNome() +" começando a ser inserido!")) ;
+            //USA HELPER PARA CRIAR UM NOVO
+            if(this.helpChars.salvaPersonagemNovo(this.personagemNovo)  ==true ){
+                FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Concluido", 
+                            this.personagemNovo.getNome() +" foi inserido!")) ;
+                this.personagemNovo = new Personagens();
+            }
+        }else{
+            System.out.println("ENTREI ELSE");
+            FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO!", 
+                        "Não foi possivel inserir !")) ;
+        }
+        return true;
     }
     
     //GETTERS E SETTERS
@@ -74,4 +95,13 @@ public class beanIndex implements Serializable {
     public void setListaChar(ArrayList<Personagens> listaChar) {
         this.listaChar = listaChar;
     }
+
+    public Personagens getPersonagemNovo() {
+        return personagemNovo;
+    }
+
+    public void setPersonagemNovo(Personagens personagemNovo) {
+        this.personagemNovo = personagemNovo;
+    }
+    
 }

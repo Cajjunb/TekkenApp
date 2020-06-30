@@ -11,7 +11,7 @@
     </h:head>
     <h:body>
         <p:growl id="msgs" />
-        <h:form>
+        <h:form id="formGlobal" >
             <p:dataTable var="personagem" id="tabela" value="#{beanIndex.listaChar}" editable="true">
                 <!--AJAX REQUEST-->
                 <p:ajax event="rowEdit" listener="#{beanIndex.salvaPersonagem(personagem)}" update=":msgs" />
@@ -57,14 +57,20 @@
                     </p:dataTable>
                 </p:rowExpansion>
             </p:dataTable>
-        </h:form>
         
-        <div class="ui-g">
-            <div class="ui-g-12">
-                <p:inputText placeholder="Nome Novo Personagem" id="nomeNovo" />   
-                <p:commandButton value="Adiciona Personagem" styleClass="ui-priority-primary" process="@this" update=":form:msgs"
-                              action="#{beanIndex.criaChar}" />
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:inputText value="#{beanIndex.personagemNovo.nome}" placeholder="Nome do Novo personagem" />
+                    <p:commandButton value="Adiciona Personagem" styleClass="ui-priority-primary" 
+                                     process="@this" actionListener="#{beanIndex.criaChar()}" 
+                                     update="formGlobal:debug :msgs" />
+                </div>
+                <div class="ui-g-12">
+                    <p:commandButton value="Add new row" styleClass="ui-priority-primary" process="@this" 
+                                     action="#{beanIndex.criaChar()}" />
+                </div>
+                <h:outputText id='debug' value="#{beanIndex.personagemNovo.nome}" />
             </div>
-        </div>
+        </h:form>
     </h:body>
 </html>
