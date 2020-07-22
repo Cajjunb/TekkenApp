@@ -6,7 +6,7 @@
     <class name="modelos.Personagens" table="personagens" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="sequence" />
+            <generator class="native" />
         </id>
         <property name="nome" type="string">
             <column name="nome" length="50" not-null="true" />
@@ -14,7 +14,7 @@
         <property name="fotoUrl" type="string">
             <column name="foto_url" length="300" not-null="true" />
         </property>
-        <set name="golpes" table="golpes" inverse="true" fetch="subselect" lazy="true" >
+        <set name="golpes" table="golpes" inverse="true" fetch="select" lazy="false">           
             <key>
                 <column name="fk_id_char" not-null="true"></column>
             </key>     

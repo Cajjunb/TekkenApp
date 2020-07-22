@@ -11,66 +11,78 @@
     </h:head>
     <h:body>
         <p:growl id="msgs" />
-        <h:form id="formGlobal" >
-            <p:dataTable var="personagem" id="tabela" value="#{beanIndex.listaChar}" editable="true">
-                <!--AJAX REQUEST-->
-                <p:ajax event="rowEdit" listener="#{beanIndex.salvaPersonagem(personagem)}" update=":msgs" />
-                <p:column headerText="Id" >
-                    <h:outputText value="#{personagem.id}" />
-                </p:column>
-                <p:column headerText="Nome" >
-                    <p:cellEditor >
-                        <f:facet name="output" ><h:outputText value="#{personagem.nome}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{personagem.nome}" 
-                                           style="width:100%" label="Nome Personagem" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Foto">
-                    <p:cellEditor >
-                        <f:facet name="output" ><h:outputText value="#{personagem.fotoUrl}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{personagem.fotoUrl}" 
-                                                style="width:100%" label="Url foto" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column style="width:35px">
-                    <p:rowEditor />
-                </p:column>
-                <p:column>
-                    <p:rowToggler />
-                </p:column>
-                <p:rowExpansion>
-                    <p:dataTable value="#{personagem.golpes}" var="golpe" >
-                        <f:facet name="header" >
-                            Golpes:
-                        </f:facet>
-                        <p:column>
-                            <h:outputText value="#{golpe.id}" />
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="#{golpe.input}" />
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="#{golpe.nomeGolpe}" />
-                        </p:column>
-                    </p:dataTable>
-                </p:rowExpansion>
-            </p:dataTable>
+            <h:form id="formTabela" >
+                <p:dataTable  var="personagem" id="tabela" value="#{beanIndex.listaChar}" editable="true">
+                    <!--AJAX REQUEST-->
+                    <p:ajax event="rowEdit" listener="#{beanIndex.salvaPersonagem(personagem)}" update=":msgs" />
+                    <p:column headerText="Id" >
+                        <h:outputText value="#{personagem.id}" />
+                    </p:column>
+                    <p:column headerText="Nome" >
+                        <p:cellEditor >
+                            <f:facet name="output" ><h:outputText value="#{personagem.nome}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{personagem.nome}" 
+                                               style="width:100%" label="Nome Personagem" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Foto">
+                        <p:cellEditor >
+                            <f:facet name="output" ><h:outputText value="#{personagem.fotoUrl}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{personagem.fotoUrl}" 
+                                                    style="width:100%" label="Url foto" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column style="width:35px">
+                        <p:rowEditor />
+                    </p:column>
+                    <p:column>
+                        <p:rowToggler />
+                    </p:column>
+                    <p:rowExpansion>
+                        <p:dataTable value="#{personagem.golpes}" var="golpe" >
+                            <f:facet name="header" >
+                                Golpes:
+                            </f:facet>
+                            <p:column>
+                                <h:outputText value="#{golpe.id}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{golpe.input}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{golpe.nomeGolpe}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:rowExpansion>
+                </p:dataTable>
+            </h:form>
         
             <div class="ui-g">
-                <div class="ui-g-12">
-                    <p:inputText value="#{beanIndex.personagemNovo.nome}" placeholder="Nome do Novo personagem" />
-                    <p:commandButton value="Adiciona Personagem" styleClass="ui-priority-primary" 
-                                     process="@this" actionListener="#{beanIndex.criaChar()}" 
-                                     update="formGlobal:debug :msgs" />
-                </div>
-                <div class="ui-g-12">
-                    <p:commandButton value="Add new row" styleClass="ui-priority-primary" process="@this" 
-                                     action="#{beanIndex.criaChar()}" />
-                </div>
-                <h:outputText id='debug' value="#{beanIndex.personagemNovo.nome}" />
+                <h:form id="formGlobal" >
+                    <div class="ui-g-12">
+                        <p:inputText value="#{beanIndex.charPrincipal.nome}" 
+                                     placeholder="Nome do Novo personagem">
+                            <p:ajax event="valueChange" />
+                        </p:inputText>
+                        <p:commandButton  value="Adiciona Personagem" styleClass="ui-priority-primary" 
+                                          process="@this" actionListener="#{beanIndex.criaChar()}" 
+                                        update=":formGlobal :msgs formTabela:tabela" />
+                    </div>
+                    <div class="ui-g-12">
+                        <p:commandButton value="Add new row" styleClass="ui-priority-primary" process="@form" 
+                                         update="formGlobal:debug " />
+                    </div>
+                    <p:outputPanel>
+                        INPUT:
+                        <h:outputText id='debug' value="#{beanIndex.charPrincipal.nome}" />
+                        <p:inputText  value="#{beanIndex.charPrincipal.nome}"  >
+                            <p:ajax event="valueChange"   />
+                        </p:inputText>
+                        <p:commandButton value="Debug" actionListener="#{beanIndex.debug()}"  update=":formGlobal :msgs" process="@this" />
+                    </p:outputPanel>   
+                </h:form>
             </div>
-        </h:form>
     </h:body>
 </html>

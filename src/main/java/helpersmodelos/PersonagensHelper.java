@@ -28,34 +28,16 @@ public class PersonagensHelper implements Serializable {
     private  Transaction transacao = null;
     
     public PersonagensHelper(){
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-    }
-    /**
-     * Metodo que retorna o personagem principal
-     * @return 
-     */
-    public ArrayList<Personagens> getPersonagemPrincipal(){
-        ArrayList<Personagens> chars = null;
-        try{
-            session.beginTransaction();
-            Query q = session.createQuery("from Personagens as char  where char.nome = 'Jin'");
-            chars = (ArrayList<Personagens>) q.list();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        if(chars == null)
-            return chars;
-        else
-            return chars;
     }
     
     public ArrayList<Personagens> getListaPersonagens(){
         ArrayList<Personagens> chars = null;
         try{
-            if(this.transacao == null)
-                this.transacao = session.beginTransaction();
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
             Query q = session.createQuery("from Personagens");
             chars = (ArrayList<Personagens>) q.list();
+            this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -68,11 +50,12 @@ public class PersonagensHelper implements Serializable {
     public boolean salvaPersonagem(Personagens registro){
         boolean resultado = false;
         try{
-            if(this.transacao == null)
-                this.transacao = session.beginTransaction();
-            session.persist(registro);
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
+            session.saveOrUpdate(registro);
             resultado = true;
             transacao.commit();
+            this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -86,11 +69,12 @@ public class PersonagensHelper implements Serializable {
     public boolean salvaPersonagemNovo(Personagens registro){
         boolean resultado = false;
         try{
-            if(this.transacao == null)
-                this.transacao = session.beginTransaction();
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
             session.save(registro);
             resultado = true;
             transacao.commit();
+            this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -25,15 +25,15 @@ import modelos.Personagens;
 @ViewScoped
 public class beanIndex implements Serializable {
     @Inject
-    private PersonagensHelper helpChars ;
+    private PersonagensHelper helpChars;
     private Personagens charPrincipal;
     private ArrayList<Personagens> listaChar;
-    private Personagens personagemNovo;
+    private String inputStringPersonagem;
     
     @PostConstruct
     public void init(){
         this.listaChar = this.helpChars.getListaPersonagens();
-        this.personagemNovo = new Personagens() ;
+        this.charPrincipal = new Personagens() ;
     }
 
     /**
@@ -41,6 +41,8 @@ public class beanIndex implements Serializable {
      * @param registro 
      */
     public void salvaPersonagem(Personagens registro){
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"TENTANDO !" + registro.toString(),"" )) ;
         if (this.helpChars.salvaPersonagem(registro))
             FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Personagem Salvo!", "")) ;
@@ -49,18 +51,31 @@ public class beanIndex implements Serializable {
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro!", "Personagem não foi alterado!")) ;
     }
     
+    public void debug(){
+        System.out.println(this.charPrincipal.getNome());
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"DEBUG", 
+                        "DEBUG")) ;
+    }
+    
+    
+    
     
     public boolean criaChar(){
-        if(this.personagemNovo.getNome() != null){
+        System.out.println(this.charPrincipal.getNome());
+        System.out.println(this.charPrincipal.getFotoUrl());
+        if(this.charPrincipal.getNome().equals("") == false){
+            Personagens registroNovo = new Personagens();
+            registroNovo.setNome(this.charPrincipal.getNome());
+            registroNovo.setFotoUrl("Nulo");
             FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"TENTANDO!", 
-                        this.personagemNovo.getNome() +" começando a ser inserido!")) ;
+                        this.inputStringPersonagem +" começando a ser inserido!")) ;
             //USA HELPER PARA CRIAR UM NOVO
-            if(this.helpChars.salvaPersonagemNovo(this.personagemNovo)  ==true ){
+            if(this.helpChars.salvaPersonagemNovo(registroNovo)  ==true ){
                 FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Concluido", 
-                            this.personagemNovo.getNome() +" foi inserido!")) ;
-                this.personagemNovo = new Personagens();
+                            this.inputStringPersonagem +" foi inserido!")) ;
             }
         }else{
             System.out.println("ENTREI ELSE");
@@ -95,13 +110,14 @@ public class beanIndex implements Serializable {
     public void setListaChar(ArrayList<Personagens> listaChar) {
         this.listaChar = listaChar;
     }
-
-    public Personagens getPersonagemNovo() {
-        return personagemNovo;
+    
+    public String getInputStringPersonagem() {
+        return inputStringPersonagem;
     }
 
-    public void setPersonagemNovo(Personagens personagemNovo) {
-        this.personagemNovo = personagemNovo;
+    public void setInputStringPersonagem(String inputStringPersonagem) {
+        this.inputStringPersonagem = inputStringPersonagem;
     }
+
     
 }
