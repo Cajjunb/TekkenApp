@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <p:dataTable value="#{personagem.golpes}" var="golpe" >
+        <f:facet name="header" >
+            Golpes:
+        </f:facet>
+        <p:column>
+            <h:outputText value="#{golpe.id}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{golpe.input}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{golpe.nomeGolpe}" />
+        </p:column>
+    </p:dataTable>
+    <p:panel >
+        <p:inputText  value="#{beanIndex.inputGolpeNovo}" placeholder="Input Golpe" >
+            <p:ajax event="valueChange" />
+        </p:inputText>
+        <p:commandButton icon="pi pi-save"  styleClass="ui-priority-primary" 
+                         process="@this" actionListener="#{beanIndex.criaGolpe(personagem)}"
+                        />
+    </p:panel>
+</ui:composition>

@@ -18,6 +18,14 @@ public class Golpes implements Serializable{
     private String input;
     private Personagens personagem;
 
+    public Golpes(){}
+    
+    public Golpes(String nomeGolpe, String input, Personagens personagem) {
+        this.nomeGolpe = nomeGolpe;
+        this.input = input;
+        this.personagem = personagem;
+    }
+
     public int getId() {
         return id;
     }

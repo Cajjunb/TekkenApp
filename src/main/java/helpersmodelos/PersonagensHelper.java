@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import utilidades.HibernateUtil;
 import org.hibernate.Session;
 import javax.faces.bean.ViewScoped;
+import modelos.Golpes;
 import org.hibernate.Transaction;
 
 /**
@@ -47,6 +48,54 @@ public class PersonagensHelper implements Serializable {
             return chars;
     }
     
+    /**
+     * Salva golpe que sera criado com alguns parametros
+     * @param registro
+     * @return 
+     */
+    public boolean salvaGolpeNovo(String nomeGolpe,String input, Personagens personagem){
+        boolean resultado = false;
+        Golpes golpeNovo = new Golpes(nomeGolpe,input,personagem);
+        try{
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
+            session.saveOrUpdate(golpeNovo);
+            resultado = true;
+            transacao.commit();
+            this.session.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+    
+    /**
+     * Update golpe passado
+     * @param registro
+     * @return 
+     */
+    public boolean salvaGolpe(Golpes registro){
+        boolean resultado = false;
+        try{
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
+            session.saveOrUpdate(registro);
+            resultado = true;
+            transacao.commit();
+            this.session.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+    
+    
+    
+    /**
+     * Salvar Personagem Edicao
+     * @param registro
+     * @return 
+     */
     public boolean salvaPersonagem(Personagens registro){
         boolean resultado = false;
         try{

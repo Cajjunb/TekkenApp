@@ -1,20 +1,22 @@
 package beans;
 
 import helpersmodelos.PersonagensHelper;
+import modelos.Personagens;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.ArrayList;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import modelos.Personagens;
-
+import modelos.Golpes;
+/**
+ *
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the temTplate in the editor.
  */
 
 /**
@@ -25,15 +27,17 @@ import modelos.Personagens;
 @ViewScoped
 public class beanIndex implements Serializable {
     @Inject
-    private PersonagensHelper helpChars;
+    private PersonagensHelper helpChars ;
     private Personagens charPrincipal;
     private ArrayList<Personagens> listaChar;
-    private String inputStringPersonagem;
+    private String inputStringPersonagem, inputGolpeNovo;
     
     @PostConstruct
     public void init(){
+        System.out.println("\t OPA DEBUG POSTCONSTRUCT");
         this.listaChar = this.helpChars.getListaPersonagens();
         this.charPrincipal = new Personagens() ;
+        this.inputGolpeNovo = new String();
     }
 
     /**
@@ -52,15 +56,39 @@ public class beanIndex implements Serializable {
     }
     
     public void debug(){
-        System.out.println(this.charPrincipal.getNome());
+        System.out.println(this.inputGolpeNovo);
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"DEBUG", 
                         "DEBUG")) ;
     }
     
+    /**
+     * Insere um golpe novo para o determinado personagem. O personagem dono do golpe eh em argumento
+     * @param personagem
+     * @return 
+     */
+    public boolean criaGolpe(Personagens personagem){
+        boolean retorno = false;
+        System.out.println("\tDEBUG: string="+this.inputGolpeNovo);
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"TENTANDO SALVAR GOLPE", 
+                        "DEBUG")) ;
+        if(this.inputGolpeNovo.equals("") == false){
+            this.helpChars.salvaGolpeNovo("",this.inputGolpeNovo,personagem);
+            // SALVA
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Salvo novo Golpe", 
+                            "DEBUG")) ;
+        }
+        return retorno;
+    }
     
     
     
+    /**
+     * Funcao que Cria uma nova instancia de Char e salva no banco
+     * @return boolean o resultado da operacao
+     */
     public boolean criaChar(){
         System.out.println(this.charPrincipal.getNome());
         System.out.println(this.charPrincipal.getFotoUrl());
@@ -117,6 +145,14 @@ public class beanIndex implements Serializable {
 
     public void setInputStringPersonagem(String inputStringPersonagem) {
         this.inputStringPersonagem = inputStringPersonagem;
+    }
+
+    public String getInputGolpeNovo() {
+        return inputGolpeNovo;
+    }
+
+    public void setInputGolpeNovo(String inputGolpeNovo) {
+        this.inputGolpeNovo = inputGolpeNovo;
     }
 
     

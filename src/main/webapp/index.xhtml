@@ -13,6 +13,11 @@
         <p:growl id="msgs" />
             <h:form id="formTabela" >
                 <p:dataTable  var="personagem" id="tabela" value="#{beanIndex.listaChar}" editable="true">
+                    <f:facet name="header">
+                        Lista de Personagens do Tekken 7
+                        <p:commandButton update=":popupCriaChar" value="Cria outro Personagem" onclick="$(PrimeFaces.widgets.popupCriaChar).first().addClass('lixo')"   />
+                    </f:facet>
+                    
                     <!--AJAX REQUEST-->
                     <p:ajax event="rowEdit" listener="#{beanIndex.salvaPersonagem(personagem)}" update=":msgs" />
                     <p:column headerText="Id" >
@@ -41,48 +46,25 @@
                         <p:rowToggler />
                     </p:column>
                     <p:rowExpansion>
-                        <p:dataTable value="#{personagem.golpes}" var="golpe" >
-                            <f:facet name="header" >
-                                Golpes:
-                            </f:facet>
-                            <p:column>
-                                <h:outputText value="#{golpe.id}" />
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="#{golpe.input}" />
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="#{golpe.nomeGolpe}" />
-                            </p:column>
-                        </p:dataTable>
+                        <ui:insert name="tabelaGolpes">
+                            <ui:include src="/golpes/tabelaGolpes.xhtml"  />
+                        </ui:insert>
                     </p:rowExpansion>
                 </p:dataTable>
             </h:form>
         
-            <div class="ui-g">
+        <p:panel id="popupCriaChar" widgetVar="popupCriaChar"  styleClass="ui-g" >
                 <h:form id="formGlobal" >
                     <div class="ui-g-12">
                         <p:inputText value="#{beanIndex.charPrincipal.nome}" 
                                      placeholder="Nome do Novo personagem">
                             <p:ajax event="valueChange" />
                         </p:inputText>
-                        <p:commandButton  value="Adiciona Personagem" styleClass="ui-priority-primary" 
+                        <p:commandButton icon="pi pi-save"  styleClass="ui-priority-primary" 
                                           process="@this" actionListener="#{beanIndex.criaChar()}" 
                                         update=":formGlobal :msgs formTabela:tabela" />
                     </div>
-                    <div class="ui-g-12">
-                        <p:commandButton value="Add new row" styleClass="ui-priority-primary" process="@form" 
-                                         update="formGlobal:debug " />
-                    </div>
-                    <p:outputPanel>
-                        INPUT:
-                        <h:outputText id='debug' value="#{beanIndex.charPrincipal.nome}" />
-                        <p:inputText  value="#{beanIndex.charPrincipal.nome}"  >
-                            <p:ajax event="valueChange"   />
-                        </p:inputText>
-                        <p:commandButton value="Debug" actionListener="#{beanIndex.debug()}"  update=":formGlobal :msgs" process="@this" />
-                    </p:outputPanel>   
                 </h:form>
-            </div>
+        </p:panel>
     </h:body>
 </html>
