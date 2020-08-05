@@ -14,7 +14,7 @@
         <property name="fotoUrl" type="string">
             <column name="foto_url" length="300" not-null="true" />
         </property>
-        <set name="golpes" table="golpes" inverse="true" fetch="select" lazy="false">           
+        <set name="golpes" table="golpes" inverse="true" fetch="select" lazy="true">           
             <key>
                 <column name="fk_id_char" not-null="true"></column>
             </key>     

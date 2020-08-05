@@ -1,0 +1,28 @@
+{
+  "name": "tekkenapp",
+  "version": "0.0.1",
+  "description": "Aplicacao de aprendizagem para java web. Ja foi usado primefaces mas agora vou usar angularjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cajjunb/TekkenSistema.git"
+  },
+  "keywords": [
+    "java",
+    "Tekken",
+    "angularjs",
+    "javaee"
+  ],
+  "author": "Leandro Ramalho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cajjunb/TekkenSistema/issues"
+  },
+  "homepage": "https://github.com/Cajjunb/TekkenSistema#readme",
+  "dependencies": {
+    "angular": "^1.8.0"
+  }
+}
