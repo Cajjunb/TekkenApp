@@ -1,0 +1,408 @@
+licoes.txt
+    JSF:
+        ARQUITETURA baseada em componentes de INTERFACE DE USUARIO a partir do servidor
+        BASEADO em uso de servlet. 
+
+        o SERVLET É CONFIGURADO no arquivo: web.xml
+
+        WEB.XML:
+            Necessario
+            declarar:
+                <servlet>
+                <servlet-mapping>
+                OPCIONAL
+                <welcome-file-list>
+
+
+
+        FACELETS:
+            serve para criação de templates em JSF
+            Voce utiliza o componente <ui:composition> para Ignorar tudo fora do componente. Usa <ui:composition> para utilizar um template usando o argumento template.
+
+                o Arquivo template é o principal e ele eh puxado por um ui composition e ele usa o <ui:include> para juntar os bloquinhos
+                cada arquivo include possui um <ui:composition>
+
+        Bean = MODELS
+
+        JSF roda em servlets como toda tecnolgoia java
+
+        SERVLET FACES é o servlet do jsf
+
+                BEANS FUNCIONAM COMO um "model" da view e controller ao mesmo tempo
+                TODOS OS VALORES estao mapeados em propriedades nas BEANS 
+
+                voce consegue colocar parametros em chamadas de metodos.
+                ACTION metodo(bean.parametro)
+
+                FORMS com o JSF sao submetidos sempre em SUA INTEGRIDADE
+                   COM O PRIMEFACES com o atributo PARTIALSUBMIT, ele divide o form
+                   pode ser configurado todo com partial submit
+
+
+                ROWEXPAND TEM DIFICULDADES PARA FAZER CELL EDIT.
+                    DENTRO do row exapnd NAO TEM VINCULO COM A TABELA
+                    A SOLUÇÃO FOI PARA CADA CAMPO colocar uma TABLE DE SÓ UMA COLUNA
+                    
+
+                SELECTONE MENU NECESSITA umaa CLASSE CONVERSORA, coloquei no pacote models
+                    por causa do funcionamento dessa merda, o PARCIAL AJAX SUBMITTER precisa ter o EVENTO = itemSelect!
+                    SE TIVER DENTRO DE UMA TABELA é pior ainda, USE a solução anterior junto com essa aqui
+                    implementação converter:
+                    https://respostas.guj.com.br/8967-converter-para-selectonemenu-do-primefaces
+
+
+                FIND COMPONENT:
+                    CONDICOES EM ORDEM
+                        1 - <Separador>ID  Inicio Absoluto resto Relativo
+                        
+                        TEM QUE DECLARAR O FORM, COMPONENTE FORM E ESPECIAL
+                        https://docs.oracle.com/javaee/6/api/javax/faces/component/UIComponent.html#findComponent(java.lang.String)
+
+                DATA TABLE:
+                    value=LIST<TIPO SERIALIZAVEL> 
+                    var=<nomeVariavelAuxiliar>
+                    filteredValue=OUTRA LISTA AUXILIAR<TIPO SERIALIZAVEL> 
+                        TODAS AS <p:COLUMNS precisam ter filtered=true|false  SIM
+
+                        QUANDO HÁ ROWEXPAND vc precisa fazer fazer LAZY loading
+                        para fazer FILTRAGEM!!! 
+
+                    LAZY LOADING: voce precisa implementear um model, uma classe que extende LazyLoading<TIPO REGISTRO>
+
+                    se vc PRECISA  IMPLEMENTAR LOAD com essa ASSINATURA:
+                         public List<Acao> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+
+                            //FILTRE
+                            //ORGANIZE(SORT)
+                            //PAGINE
+
+
+                         }
+
+                CONFIRM  BUTTON:
+                    DENTRO De uma tabela so funciona se nao for global e os <p:commandButton nao tiver type="button">
+
+                    O action deve estar dentro por exemplo 
+                        <p:confirmDialog >
+                            <p:commandButton actionListener="salvaAcao(#{aIndex})"
+                            .
+                            .
+                            .
+                            
+
+
+                TESTANDO JSF:
+
+                    Parece que não se consegue testar quando vc usa o FACES CONTEXT, tem que se usar a injeção de dependencia e colocar metodos assim.
+                    
+                    @Inject
+                    public void setFacesMessages(FacesMessages messages) {
+                        this.messages = messages;
+                    }
+
+
+        JAVAEE:
+            Algumas Anotacoes como @named fazem toda a diferenca
+            o SortBy com annotation @viewScopped funcionou na BEAN
+
+                        classe STREAM CONSEGUE FAZER FILTRAGENS FUNCIONAIS com PREDICADOS
+                         ArrayList().stream().filter(PREDICADO). blabla
+
+                         https://www.tutorialspoint.com/jsf/jsf_managed_beans.htm
+
+
+        WIDGET:
+            OBJETOS JQUERY que representam o comportamento do lado do cliente, usado como variavel de referência. pode ser acessado pelo chamamento "Primefaces.widgets['nomeWidget']" OU PF('nomeWidget')
+
+            Ele pode acessar via servidor da view,  atraves da bean
+
+
+        TOMCAT (!= de APACHE):
+            Servidor de servlets java:
+                Configurados por arquivos context.xml ou por outro lugar mais indicado
+                eles colocam o arquivo web.xml bonitinho.
+
+                        DE REPENTE FUNCIONOU. Apos reiniciar o pc, nao mudei nada:
+                            ficou com o context.xml assim:
+                            <Context blablabla>
+                                <!-- Default set of monitored resources -->
+                                <WatchedResource>WEB-INF/web.xml</WatchedResource>
+                            </Context>
+
+                            O QUE LINKA PARA a configuracao do SERVLET do JSF, FAces servlet
+
+
+            COMO ACABR O TOM CAT:
+                netstat -aon | find /i "listening" | find "8080"
+                taskkill /F /PID 14404
+
+            SERVER.XML:
+                ARQUIVO DE CONFIGURAção do tomcat. Esta na pasta conf
+                SSL E TLS é feito por aqui
+                <Connctor argumentos altos />
+
+        CICLO DE VIDA: (A CADA MÉTODO/REQUISIÇÃO)
+            RESTORE VIEW: Constroi VIEW, Coloca os Event Handlers e Validator e joga na instancia FACES   NAO RENDERIZOU
+
+            APLICA DADOS DOS REQUESTS: na VIEW reconstruida  
+
+            VALIDAÇAO: Valida os campos locais (isso quer dizer os campos aplicados do request ou nao)
+
+            ATUALIZA BEAN: atualiza os modelos, pode dar callback e ir p/ renderizar (ALTERANDO OS CAMPOS a cada METODO)
+
+            INVOCA APPLICACAO (Controllers)                 
+
+            RENDERIZACAO
+                (PRIMEIRA VEZ Coloca no DOM TREE) Renderiza o que esta na DOM TREE
+
+
+
+        FACE_CONFIG:
+            CONFIGURACAO DE TODO O SeRVICO DO SERVLET,
+
+            NECESSITA DECLARACAO DE TODOS OS BEANS
+
+
+            perdido em tanto .xml o que faço??? qual a diferenca e ntra o faces config e beans.xml arrisca
+
+        MIMETYPE:
+            Declaracao de tipos de arquivos transmitidos pelo serrvidor
+
+        NETBEANS:
+            NAO FUNCIONA BEM COM MAVEN, tive que USAR O MAVEN para criar outro projeto com a dependencia do JDBC certa, baixar e incluir MANUALMENTE
+
+
+                 SQL:
+                    GROUPBY (Coluna)
+                        Valor da coluna precisa SER IGUALZINHO, para mser agrupado.
+                        USADO para separar COUNTS por valores diferentes da coluna
+
+                        joga o jogo
+
+        POSTGRES:
+            ACESSO MASTER
+            o DE SEMPRE
+            usuario:
+                root (?)
+
+            Acesso ao servidor do inovacredito
+            usuario:
+                postgres
+            senha:
+                root
+
+                VER REGISTROS
+                    Procura entrando na mais interna SUBPASTE e MOUSE DIREITO EM VIEW (ALL ROWS)
+
+
+            AUTO INCREMENT SE PRECISAR ALTERAR voce precisa dar drop na coluna refazer todas as 
+
+
+
+            SQL SERVER:
+                feito pela Microsoft
+
+                Utiliza como admin o ssms (Microsoft sql server manager)
+
+                Tem 4 categorias de perfis de usuario:     Somando as subcategorias 20 perfis de usuario
+                    Identificação pelo Usuario (Conta do windows)
+                    SQL server usuario e senha 
+                    Active directory
+                    e outro
+
+                Criei um usuario sql server com usuario e senha 
+
+                tive que configurar o servidor para acessar outros tipos de login: windows e SQL SERVER USUARIO
+
+                to_char -> convert(varchar(numero) , campo, formato)
+                http://www.sqlines.com/oracle-to-sql-server/to_char_datetime
+
+
+    INSTANCIEI MESMO PARA SAIR DO NULL POINTER
+
+
+    FAZER O WEB_INF LIB do metainf configurar
+    os JARSm delkcarar
+
+    Agora voltou o erro de jdbc, como fiz?
+
+
+
+DEMANDAS:
+    Adicionar Idéias, filtro de idéias, ediçao de idéias
+        
+ONDE PAROU:
+        
+        TERMINEI O FILTER DE PREFIXO.
+
+        Falta o erro de escolher o prefixo zerar a equipe
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+       bean-discovery-mode="all">
+
+</beans>
+
+
+
+tomcat 8.5XXX ou 9
+
+
+
+CERTIFICADOS DIGITAIS:
+    
+    Arquivos:
+    
+        .CER    : CHAVE PUBLICA
+        .KEY    : CHAVE PRIVADA
+        .KEYSTORE : CONJUNTO DE  CHAVES no formato chave e valor  ( e um alias) no formato java
+        
+        CONVERSAO .CER .KEY  para keystore:  https://rmohan.com/?p=3015
+
+        O chamado para um servidor certificado:
+            <NOME DO CERTIFICADO>
+
+CDI:
+
+    O CDI faz a gestao de injeção. Uma evolução  managed beans do jsf.
+    Porém 
+    NÃO há conversa entre managed beans do jsf e os managed beans do CDI
+    
+    pqpqpq
+
+
+
+NPM:
+    Gerenciador de dependencia javascript.
+    Funciona através da tecnologia NODE.js
+    Base para várias outras tecnologias
+
+    npm install: (-g :global ) (<nome dos modulos>) (--save salva o modulo definido no package)
+        instala todas dependencias definidas no package.json
+
+    npm init:
+        inicia o gerenciamento de modulos java nesse projeto.
+        usado na pasta raiz do projeto
+
+
+
+GRUNT:
+    
+    Automatização de tarefas ligada ao javascript (será que javascript)
+    Tarefas incluem MINIFICACAO COMPILACAO TESTE UNITARIO (LINTING???)
+
+    NPM e BOWER fazem parecido a mesma coisa.
+
+
+    POWER SHELL TIVE QUE ALTERAR NO ESCOPO DO meu USUARIO para Bypass
+        FONTE: https://docs.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7
+
+
+
+
+ANGULARJS:
+    angularjs toma o lugar do jsf INTERFACE DE USUARIO, disponibilizando uma aplicação processada na máquina do cliente.
+    o que diferencia do JSF
+
+    INTERESSANTE USAR O NPM para gerenciamento dos modulos de javascript, no caso o angularjs
+
+    CONFIGURACAO BASE NPM para usar o ANGULAR:
+        https://github.com/angular/angular-seed/blob/master/package.json
+
+
+    APRENDER JPA para fazer STATELESS
+
+
+HIBERNATE:
+
+	Tem várias formas de configurar a ORM do Hibernate:
+		ARQUIVOS DE ENGENHARIA REVERSA:
+			hibernate.reveng.xml
+				ele acessa o banco de dados e verifica quais tabelas tem
+				e cria um arquivo xml que DITA  a ESTRATEGIA DE MAPEAMENTO (NECESSÁRIO?)
+		ARQUIVOS DE MAPEAMENTO:
+			(<entidade>.hbm.xml)
+			arquivos de mapeamento que ditam como são as colunas e outros metadados da tabela 
+
+
+	HibernateUTil:
+		Uma classe que instancia um objeto Fabrica de sessões.    
+		(DETALHE usasse a classe Configuration invés de AnnotationConfiguration, depreciada)
+
+
+
+		ANTES DE QUALQUER CONSULTA, VC PRECISA STARTAR UMA SESSAO:
+			session.beginTransaction();
+			session.close();  <- CASO ESTEJA em um ambiente 
+
+
+
+	Propriedades do hibernate.cfg.xml:
+
+		<OBVIO>
+
+    	<property name="hibernate.hbm2ddl.auto">create-drop</property>
+    		Algo similar a uma migration RUIM. toda ver que Voce der RE deploy ele tenta migrar.
+    		Possui várias opções
+    			create
+    			create-drop
+    			update  <-- MAIS SEGURO
+
+
+
+TESTS:
+
+	Arquitetura de tests:
+
+		APP/
+			src/
+				/main
+				/tests
+					/java
+						CLASSES DE TEST
+
+	Classes TESTE:
+
+		import org.junit.After;
+		import org.junit.AfterClass;
+		import org.junit.Before;
+		import org.junit.BeforeClass;
+		import org.junit.Test;
+		import static org.junit.Assert.*;
+
+		public class <nomeClasse> {
+			@BeforeClass
+			public static void setUpClass{}
+			@AfterClass
+			public static void tearDownClass{}
+			@Before
+			pubic void setUp(){}
+			@After
+			pubic void setDown(){}
+
+
+			//@Test
+			public void <nomeDoTeste>(){
+			
+			}
+
+		}
+
+        CLASSES NUCLEO:
+            import org.junit.runner.JUnitCore;
+            import org.junit.runner.Result;
+            import org.junit.runner.notification.Failure;
+
+            public class JUnitMain extends JUnitCore {
+                public static void main(String args[]){
+                    USAR OBJETOS PARA RODAR as CLASSES
+
+                        JUnitCore.runClasses(<ClasseTeste>.class);
+                }
+            }
+
+

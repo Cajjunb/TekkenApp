@@ -111,6 +111,13 @@
             <version>5.4.4.Final</version>
         </dependency>
 
+        <!-- JPA  -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
         
         <!--DELTA SPIKE  E EXTENSOES-->
         <dependency>
