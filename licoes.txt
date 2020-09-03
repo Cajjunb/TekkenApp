@@ -353,6 +353,12 @@ HIBERNATE:
     			update  <-- MAIS SEGURO
 
 
+BI:
+
+    POWER BI FERRAMENTA:
+
+        TEm uma linguagem de programaçõa interna chamada DAX
+            use o DAX STUDIO
 
 TESTS:
 

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import modelos.Golpes;
 /**
  *
@@ -34,7 +37,13 @@ public class beanIndex implements Serializable {
     
     @PostConstruct
     public void init(){
-        System.out.println("\t OPA DEBUG POSTCONSTRUCT");
+        try{
+            InitialContext initialContext = new InitialContext();
+            Context env = (Context) initialContext.lookup("java:/comp/env");
+            System.out.println(env.lookup("myConnectionURL"));
+        }catch(NamingException e){
+        
+        }
         this.listaChar = this.helpChars.getListaPersonagens();
         this.charPrincipal = new Personagens() ;
         this.inputGolpeNovo = new String();
