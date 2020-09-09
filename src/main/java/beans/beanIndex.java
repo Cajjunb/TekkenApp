@@ -32,6 +32,7 @@ public class beanIndex implements Serializable {
     @Inject
     private PersonagensHelper helpChars ;
     private Personagens charPrincipal;
+    private Personagens charSelecionado;
     private ArrayList<Personagens> listaChar;
     private String inputStringPersonagem, inputGolpeNovo;
     
@@ -64,11 +65,30 @@ public class beanIndex implements Serializable {
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro!", "Personagem não foi alterado!")) ;
     }
     
+    /**
+     * Metodo que faz o carregamento lazy dos golpes de um determinado personagem
+     * @param personagem 
+     */
+    public void pegaListaGolpes(Personagens personagem){
+        personagem = this.helpChars.getPersonagensGolpes(personagem);
+        this.listaChar.set(this.listaChar.indexOf(personagem),personagem);
+    }
+    
+    
     public void debug(){
-        System.out.println(this.inputGolpeNovo);
+        Personagens aux = null;
+        for(Personagens p : this.listaChar){
+            if(p.getNome().equals("Kazuya"))
+                aux = p;
+        }
+        aux = this.helpChars.getPersonagensGolpes(aux);
+        this.setCharPrincipal(aux);
+//        for(Golpes golpe : golpes){
+//            System.out.println(golpe.getInput());
+//        }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"DEBUG", 
-                        "DEBUG")) ;
+                        ((Golpes)aux.getGolpes().toArray()[1]).getNomeGolpe() ) );
     }
     
     /**
@@ -162,6 +182,14 @@ public class beanIndex implements Serializable {
 
     public void setInputGolpeNovo(String inputGolpeNovo) {
         this.inputGolpeNovo = inputGolpeNovo;
+    }
+
+    public Personagens getCharSelecionado() {
+        return charSelecionado;
+    }
+
+    public void setCharSelecionado(Personagens charSelecionado) {
+        this.charSelecionado = charSelecionado;
     }
 
     

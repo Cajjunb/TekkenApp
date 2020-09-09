@@ -353,6 +353,18 @@ HIBERNATE:
     			update  <-- MAIS SEGURO
 
 
+
+
+    HIBERNATE-LAZY:
+        Hibernate precisa ter uma sessão aberta senão o hibernate ele lança excessao
+        no Session bla bla.
+        Então deixa a sesão aberta com ciclo de vida do objeto helper e usa transacoes
+        begin e commit no final.
+
+        quem sabe deixar pro metodo destrutor, mas no java não existe isso então deixa o hibernate fechar?
+
+
+
 BI:
 
     POWER BI FERRAMENTA:

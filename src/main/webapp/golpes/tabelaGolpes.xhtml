@@ -12,7 +12,12 @@ and open the template in the editor.
                     xmlns:p="http://primefaces.org/ui"
                     xmlns:ui="http://java.sun.com/jsf/facelets"
                     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <p:dataTable value="#{personagem.golpes}" var="golpe" >
+    <p:dataTable value="#{personagem.golpes}" var="golpe" 
+                 rows="10"
+                  paginator="true" filterDelay="1200" rowsPerPageTemplate="10,25,50"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                               
+                 >
         <f:facet name="header" >
             Golpes:
         </f:facet>

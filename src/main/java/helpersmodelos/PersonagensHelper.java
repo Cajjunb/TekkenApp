@@ -15,6 +15,7 @@ import utilidades.HibernateUtil;
 import org.hibernate.Session;
 import javax.faces.bean.ViewScoped;
 import modelos.Golpes;
+import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 
 /**
@@ -38,7 +39,8 @@ public class PersonagensHelper implements Serializable {
             this.transacao = session.beginTransaction();
             Query q = session.createQuery("from Personagens");
             chars = (ArrayList<Personagens>) q.list();
-            this.session.close();
+            //this.transacao.commit();
+            //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -62,7 +64,7 @@ public class PersonagensHelper implements Serializable {
             session.saveOrUpdate(golpeNovo);
             resultado = true;
             transacao.commit();
-            this.session.close();
+            //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -82,7 +84,7 @@ public class PersonagensHelper implements Serializable {
             session.saveOrUpdate(registro);
             resultado = true;
             transacao.commit();
-            this.session.close();
+            //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -104,7 +106,7 @@ public class PersonagensHelper implements Serializable {
             session.saveOrUpdate(registro);
             resultado = true;
             transacao.commit();
-            this.session.close();
+            //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -123,11 +125,28 @@ public class PersonagensHelper implements Serializable {
             session.save(registro);
             resultado = true;
             transacao.commit();
-            this.session.close();
+            //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
         }
         return resultado;
+    }
+    
+    /**
+     * Metodo que inicializa o carregamento lazy dos golpes do personagem
+     * @param personagem
+     * @return 
+     */
+    public Personagens getPersonagensGolpes(Personagens personagem){
+        try{
+            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+            this.transacao = session.beginTransaction();
+            Hibernate.initialize(personagem.getGolpes());
+            //this.session.close();
+        }catch( Exception e){
+            e.printStackTrace();
+        }
+        return personagem;
     }
     
 }
