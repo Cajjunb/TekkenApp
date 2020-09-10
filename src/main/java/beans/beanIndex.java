@@ -112,7 +112,22 @@ public class beanIndex implements Serializable {
         return retorno;
     }
     
-    
+    /**
+     * Metodo de deletar personagem. Usado na datatable.
+     * @param personagem
+     * @return 
+     */
+    public boolean deletaPersonagem(Personagens personagem){
+        boolean resultado = false;
+        if(personagem != null){
+            resultado = this.helpChars.deletaPersonagem(personagem);
+            // SALVA
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Personagem Deletado!", 
+                            "")) ;
+        }
+        return resultado;
+    }
     
     /**
      * Funcao que Cria uma nova instancia de Char e salva no banco

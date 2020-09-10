@@ -50,7 +50,10 @@
                     <p:column>
                         <p:rowToggler class="hidden" />
                         <p:remoteCommand name="rc" />
-                        <p:commandButton update=":formTabela"  icon="pi pi-save"  />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton global="true" update=":formGlobal :msgs formTabela:tabela" process="@this"
+                                         icon="pi pi-trash" actionListener="#{beanIndex.deletaPersonagem(personagem)}"  />
                     </p:column>
                     <p:rowExpansion>
                         <ui:insert name="tabelaGolpes">

@@ -36,6 +36,7 @@ and open the template in the editor.
             <p:ajax event="valueChange" />
         </p:inputText>
         <p:commandButton icon="pi pi-save"  styleClass="ui-priority-primary" 
+                          update=":formGlobal :msgs formTabela:tabela"
                          process="@this" actionListener="#{beanIndex.criaGolpe(personagem)}"
                         />
     </p:panel>
