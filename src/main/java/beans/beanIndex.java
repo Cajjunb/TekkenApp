@@ -98,7 +98,6 @@ public class beanIndex implements Serializable {
      */
     public boolean criaGolpe(Personagens personagem){
         boolean retorno = false;
-        System.out.println("\tDEBUG: string="+this.inputGolpeNovo);
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"TENTANDO SALVAR GOLPE", 
                         "DEBUG")) ;
