@@ -6,6 +6,7 @@
 package helpersmodelos;
 
 import java.io.Serializable;
+import javax.inject.Named;
 import modelos.Golpes;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,6 +15,7 @@ import org.hibernate.Transaction;
  *
  * @author Leandro
  */
+@Named
 public class GolpesHelper implements Serializable{
     
     private Session session = null;

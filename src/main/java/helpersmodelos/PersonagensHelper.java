@@ -14,7 +14,6 @@ import javax.inject.Named;
 import org.hibernate.Query;
 import utilidades.HibernateUtil;
 import org.hibernate.Session;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import modelos.Golpes;
 import org.hibernate.Hibernate;
@@ -26,7 +25,6 @@ import org.hibernate.Transaction;
  * @author Leandro
  */
 @Named
-@ViewScoped
 public class PersonagensHelper implements Serializable {
     
     private Session session = null;

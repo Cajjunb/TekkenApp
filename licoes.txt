@@ -14,6 +14,37 @@ licoes.txt
                 <welcome-file-list>
 
 
+    JAX-WS-RS:
+
+        Java WEb services Restful!!!
+        Implementação restful para java
+
+        Ele um servlet mapping, igual o JSF.
+        Definido no WEB.XML
+
+        SO FUNCIONOU DESSA FORMA: JBOSS WILDFLY v20.1.1
+        web.xml da seguinte forma:
+
+        <!--CONTEXT PARAMETERS-->
+       <servlet-mapping>
+            <servlet-name>javax.ws.rs.core.Application</servlet-name>
+            <url-pattern>/rest/*</url-pattern>
+       </servlet-mapping>
+        <!--INDEX FILE-->
+        <welcome-file-list>
+            <welcome-file>index.html</welcome-file>
+        </welcome-file-list>
+
+        ENTIDADES:
+            @XmlRootElement (PARA ENTIDADES)
+
+        CONTROLLER:
+        
+            @Produces(MediaType.JSON)
+            @Consumes(MediaType.JSON)
+
+
+
 
         FACELETS:
             serve para criação de templates em JSF
