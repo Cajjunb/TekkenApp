@@ -18,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import modelos.Personagens;
+import modelos.PersonagensDTO;
 /**
  *
  * @author Leandro
@@ -37,12 +38,13 @@ public class ServicosPersonagens  {
     
     
     @GET
-    public List<Personagens> mostra(){
-          this.listaChar = this.helpChars.getListaPersonagens();
-//        this.charPrincipal = new Personagens() ;
-//        this.inputGolpeNovo = new String();
-//        return this.listaChar.toString();
-        return this.listaChar;
+    public List<PersonagensDTO> mostra(){
+        this.listaChar = this.helpChars.getListaPersonagens();
+        ArrayList<PersonagensDTO> relacao = new ArrayList<>();
+        for(Personagens personagem: this.listaChar){
+            relacao.add(new PersonagensDTO(personagem));
+        }
+        return relacao;
     }
     
     @POST

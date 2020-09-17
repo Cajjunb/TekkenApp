@@ -6,11 +6,13 @@
 package modelos;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Leandro
  */
+@XmlRootElement
 public class Golpes implements Serializable{
     
     private int id;
