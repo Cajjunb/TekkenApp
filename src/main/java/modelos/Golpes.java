@@ -27,6 +27,13 @@ public class Golpes implements Serializable{
         this.input = input;
         this.personagem = personagem;
     }
+    
+    public Golpes(GolpesDTO golpedto, Personagens personagem){
+        this.id = golpedto.getId();
+        this.nomeGolpe = golpedto.getNomeGolpe();
+        this.input = golpedto.getInput();
+        this.personagem = personagem;
+    }
 
     public int getId() {
         return id;

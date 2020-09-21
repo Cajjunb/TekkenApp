@@ -2,6 +2,7 @@ package modelos;
 // Generated 24/06/2020 16:59:01 by Hibernate Tools 4.3.1
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +39,21 @@ public class Personagens  implements Serializable{
     public Personagens(String nome){
         this.nome = nome;
         this.fotoUrl = "NULO";
+    }
+    
+    /**
+     * Construtor a partir de um objeto DTO. Faz toda a cadeia de Conversao DTO.
+     * @param personagem 
+     */
+    public Personagens(PersonagensDTO personagem){
+        this.id = personagem.getId();
+        this.nome = personagem.getNome();
+        this.fotoUrl = personagem.getFotoUrl();
+//        HashSet<Golpes> golpesConvertidos = new HashSet<>();
+//        for(GolpesDTO golpedto : personagem.getGolpes()){
+//            golpesConvertidos.add(new Golpes(golpedto, this));
+//        }
+//        this.golpes = golpesConvertidos;
     }
 
     @Override
@@ -79,9 +95,16 @@ public class Personagens  implements Serializable{
         this.golpes = golpes;
     }
 
-
-
-
+    @Override
+    public boolean equals(Object obj){
+        boolean resultado = false;
+        if(     obj != null && 
+                obj instanceof Personagens && 
+                ((Personagens)obj).getId() == this.id ){
+            resultado = true;
+        }
+        return resultado;
+    }
 }
 
 
