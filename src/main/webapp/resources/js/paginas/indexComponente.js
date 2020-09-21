@@ -24,6 +24,8 @@ personagensModulo.controller('personagensController',function($scope, $http){
     
    $scope.selecionaPersonagem = function(personagemSelecionado){
        $scope.personagem = personagemSelecionado;
+       $('linha'+scope.personagem.id)
+       
    };
    
    $scope.limpaPersonagem = function(){

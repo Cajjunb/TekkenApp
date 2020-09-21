@@ -53,15 +53,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <tr ng-repeat="personagensTabela in personagens | filter:pesquisa" ng-click="selecionaPersonagem(personagensTabela)">
-                      <th scope="row" >{{personagensTabela.id}}</th>
-                      <td>{{personagensTabela.nome}}</td>
-                      <td>
-                          <img style="width:50px;height:50px" ng-hide="{{personagensTabela.foto == null}}"  
-                               src="{{personagensTabela.foto}}" />
-                      </td>
-                     
-                    </tr> 
+                        <tr ng-repeat="personagensTabela in personagens | filter:pesquisa"
+                            id="linha{{personagensTabela.id}}"
+                            ng-click="selecionaPersonagem(personagensTabela)">
+                            <th scope="row" >{{personagensTabela.id}}</th>
+                            <td>{{personagensTabela.nome}}</td>
+                            <td>
+                              <img style="width:50px;height:50px" ng-hide="{{personagensTabela.foto == null}}"  
+                                   src="{{personagensTabela.foto}}" />
+                            </td>
+                        </tr> 
                   </tbody>
                 </table>
             </div>
@@ -86,7 +87,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2" for="fileChar">Password</label>
                         <div class="col-sm-10">
-                            <input type="file" ng-model="personagem.foto" class="form-control" id="fileChar" placeholder="Foto do Personagem">
+                            <!--input type="file" ng-model="personagem.foto" class="form-control" id="fileChar" placeholder="Foto do Personagem"-->
+                            <input type="text" ng-model="personagem.foto" class="form-control" id="fileChar" placeholder="Foto do Personagem">
                         </div>
                     </div>
                     <button type="submit" ng-disabled="personagem.nome == null" 
