@@ -43,12 +43,13 @@ public class PersonagensHelper implements Serializable {
     public ArrayList<Personagens> getListaPersonagens(){
         ArrayList<Personagens> chars = null;
         try{
-            if(this.session == null || this.session.isOpen() == false )
+            if(this.session == null  )
                 this.session = this.fabricaSessao.getCurrentSession();
             if(this.transacao == null  || this.transacao.isActive() == false)
                 this.transacao = session.beginTransaction();
             Query q = session.createQuery("from Personagens");
             chars = (ArrayList<Personagens>) q.list();
+            this.transacao.commit();
             //this.session.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -141,8 +142,7 @@ public class PersonagensHelper implements Serializable {
     public boolean salvaPersonagem(Personagens registro){
         boolean resultado = false;
         try{
-            
-            if(this.session.isOpen() == false)
+            if(this.session == null || this.session.isOpen() == false)
                 this.session = this.fabricaSessao.getCurrentSession();
             if(this.transacao == null  || this.transacao.isActive() == false)
                 this.transacao = session.beginTransaction();
