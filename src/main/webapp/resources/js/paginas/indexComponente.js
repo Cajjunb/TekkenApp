@@ -24,6 +24,8 @@ personagensModulo.controller('personagensController',function($scope, $http){
     
    $scope.selecionaPersonagem = function(personagemSelecionado){
        $scope.personagem = personagemSelecionado;
+       $('linha'+scope.personagem.id)
+       
    };
    
    $scope.limpaPersonagem = function(){
@@ -31,13 +33,23 @@ personagensModulo.controller('personagensController',function($scope, $http){
    };
    
    $scope.salvaPersonagem = function(){
+<<<<<<< HEAD
        if($scope.personagem.id == null){
+=======
+       console.log($scope.personagem);
+       if("id" in  $scope.personagem){
+>>>>>>> 26286ce19a6bf1052e4dde68a5e3286c994e65da
            var registroNovo = {
                 'id': $scope.personagem.id != null? $scope.personagem.id :'',
                 'nome': $scope.personagem.nome ,
                 'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: ''
             };
+<<<<<<< HEAD
             $http.post(urlPersonagens,registroNovo).then(function(response){
+=======
+            console.log(registroNovo);
+            $http.put(urlPersonagens,registroNovo).then(function(response){
+>>>>>>> 26286ce19a6bf1052e4dde68a5e3286c994e65da
                $scope.personagens.push($scope.personagem);
                $scope.limpaPersonagem();
             }).catch(function(erro){
@@ -49,7 +61,11 @@ personagensModulo.controller('personagensController',function($scope, $http){
                 'nome': $scope.personagem.nome,
                 'fotoUrl': $scope.personagem.foto
             };
+<<<<<<< HEAD
             $http.put(urlPersonagens,registroNovo).then(function(response){
+=======
+            $http.post(urlPersonagens,registroNovo).then(function(response){
+>>>>>>> 26286ce19a6bf1052e4dde68a5e3286c994e65da
                $scope.personagens.push($scope.personagem);
                $scope.limpaPersonagem();
             }).catch(function(erro){
@@ -59,7 +75,30 @@ personagensModulo.controller('personagensController',function($scope, $http){
    };
    
    $scope.excluirPersonagem = function(){
-       $scope.personagens.splice($scope.personagens.indexOf($scope.personagem));
+        if('id' in $scope.personagem){ 
+            var registro = {
+                'id': $scope.personagem.id != null? $scope.personagem.id :'',
+                'nome': $scope.personagem.nome ,
+                'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: '',
+                'golpes': null
+            };
+            console.log(registro);
+            $http({
+                method: 'DELETE',
+                url: urlPersonagens,
+                data: registro,
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            }).then(function(response){
+                $scope.personagens.splice($scope.personagens.indexOf($scope.personagem));
+                console.log(response);
+            }).catch(function(erro){
+                alert(erro.toString());
+            });
+        }else{
+            console.log('OPA!');
+       }
     };
     
 });

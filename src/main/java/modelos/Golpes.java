@@ -67,7 +67,4 @@ public class Golpes implements Serializable{
         this.personagem = personagem;
     }
     
-    
-    
-    
 }
