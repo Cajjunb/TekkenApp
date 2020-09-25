@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: CharsTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.061 sec
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.153 sec
->>>>>>> 26286ce19a6bf1052e4dde68a5e3286c994e65da
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 sec
