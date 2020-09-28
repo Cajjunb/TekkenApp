@@ -5,14 +5,10 @@
     <jta-data-source>java:/tekkenapp</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <!--property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"></property>
-        <property name="javax.persistence.jdbc.driver" value="jdbc:postgresql://localhost:5432/tekkenApp"></property>
-        <property name="javax.persistence.jdbc.user" value="postgres"></property>
-        <property name="javax.persistence.jdbc.password" value="123456"></property-->
-        <property name="javax.persistence.schema-generation.database.action" value="none"/>
+        <property name="javax.persistence.schema-generation.database.action" value="create"/>
         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
         <property name="hibernate.show_sql" value="true" />
-        <property name="hibernate.hbm2ddl.auto" value="update"></property>
+        <property name="hibernate.hbm2ddl.auto" value="create-drop"></property>
         <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
         <property name="hibernate.current_session_context_class" value="thread"></property>
     </properties>

@@ -64,7 +64,7 @@ public class PersonagensDTO  implements Serializable{
         this.nome = nome;
     }
     public String getFotoUrl() {
-        return this.fotoUrl;
+        return this.fotoUrl == null? "" : this.fotoUrl;
     }
     
     public void setFotoUrl(String fotoUrl) {

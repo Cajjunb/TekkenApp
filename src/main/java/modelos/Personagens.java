@@ -40,7 +40,7 @@ public class Personagens  implements Serializable{
     public Personagens(int id, String nome, String fotoUrl) {
        this.id = id;
        this.nome = nome;
-       this.fotoUrl = fotoUrl;
+       this.fotoUrl = fotoUrl== null? "null":fotoUrl;
     }
     
     public Personagens(String nome){
