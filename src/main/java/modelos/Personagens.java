@@ -29,7 +29,7 @@ public class Personagens  implements Serializable{
      private int id;
      @Column(name="nome")
      private String  nome;
-     @Column(name="foto_url")
+     @Column(name="foto_url",nullable=true)
      private String fotoUrl;
      @OneToMany(mappedBy="modelos.golpes")
      private Set<Golpes> golpes;
