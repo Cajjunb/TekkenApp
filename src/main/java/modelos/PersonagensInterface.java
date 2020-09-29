@@ -12,8 +12,8 @@ import java.util.List;
  * @author leandro
  */
 public interface PersonagensInterface {
-    void salvarPersonagem(Personagens personagem);
-    void alterarPersonagem(Personagens personagem);
-    void deletarPersonagem(Personagens personagem);
+    boolean salvarPersonagem(Personagens personagem);
+    boolean alterarPersonagem(Personagens personagem);
+    boolean deletarPersonagem(Personagens personagem);
     List<Personagens> getListaPersonagens();
 }

@@ -8,7 +8,7 @@ package servicos;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import helpersmodelos.PersonagensHelper;
+import modelos.PersonagensHelper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -20,14 +20,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import modelos.Personagens;
 import modelos.PersonagensDTO;
-/**
- *
- * @author Leandro
- */
 
-@Path("/personagens")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+
+//@Path("/personagens")
+//@Produces(MediaType.APPLICATION_JSON)
+//@Consumes(MediaType.APPLICATION_JSON)
 @Named
 public class ServicosPersonagens  {
     
@@ -35,19 +32,12 @@ public class ServicosPersonagens  {
     private PersonagensHelper helpChars ;
     private Personagens charPrincipal; 
     private ArrayList<Personagens> listaChar;
-    private String inputStringPersonagem, inputGolpeNovo;
     
     static List<Personagens> listaStaticChars = new ArrayList<Personagens>(); 
     
-    static{
-    }
-    
-    
-    @GET
     public List<PersonagensDTO> mostra(){
         if(listaStaticChars.isEmpty())
             listaStaticChars = this.helpChars.getListaPersonagens();
-//        this.listaChar = this.helpChars.getListaPersonagens();
         ArrayList<PersonagensDTO> relacao = new ArrayList<>();
         for(Personagens personagem: listaStaticChars){
             relacao.add(new PersonagensDTO(personagem));
@@ -55,24 +45,31 @@ public class ServicosPersonagens  {
         return relacao;
     }
     
-    @POST
     public boolean executaPost(PersonagensDTO personagemdto){
         boolean resultado = false;
         System.out.println(personagemdto);
         Personagens novo = new Personagens(personagemdto);
-        this.helpChars.salvarPersonagem(novo);
+        resultado = this.helpChars.salvarPersonagem(novo);
         listaStaticChars.add(novo);
         return resultado;
     }
     
-    
-    @PUT
     public boolean executaPut(PersonagensDTO personagemdto){
+        boolean resultado = false;
         Personagens novo = new Personagens(personagemdto);
         listaStaticChars.remove(novo);
         listaStaticChars.add(novo);
-        return false;
+        resultado = this.helpChars.alterarPersonagem(novo);
+        return resultado;
     }
     
-
+    public boolean executaDelete(PersonagensDTO personagemdto){
+        boolean resultado = false;
+        Personagens registro = new Personagens(personagemdto);
+        listaStaticChars.remove(registro);
+        resultado = this.helpChars.deletarPersonagem(registro);
+        return resultado;
+        
+    }
+    
 }
