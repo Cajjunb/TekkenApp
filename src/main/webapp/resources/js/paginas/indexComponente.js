@@ -9,13 +9,13 @@ var personagensModulo = angular.module('personagensModulo',[]);
 
 personagensModulo.controller('personagensController',function($scope, $http){
     urlPersonagens = 'http://localhost:8080/TekkenApp/rest/personagens';
+    urlGolpes = 'http://localhost:8080/TekkenApp/rest/personagens/golpes';
     
     $scope.listarPersonagens = function(){
         $http.get(urlPersonagens).then(function(response){
             $scope.personagens = response.data;
             $scope.personagens.forEach(function(valor,index,array){
                 array[index]['show'] = false;
-                console.log(valor);
             });
         }).catch(function(erro){
             alert(erro.toString());
@@ -30,6 +30,18 @@ personagensModulo.controller('personagensController',function($scope, $http){
        $scope.personagem = personagemSelecionado;
        $('linha'+$scope.personagem.id);
        $scope.personagem.show = !$scope.personagem.show;
+        var registroDTO = {
+                'id': $scope.personagem.id ,
+                'nome': $scope.personagem.nome ,
+                'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: ''
+            };
+        $http.post(urlGolpes,registroDTO).then(function(response){
+            $scope.personagem = response.data;
+            console.log($scope.personagem);
+            console.log(response.data);
+        }).catch(function(erro){
+            alert(erro.toString());
+        });
    };
    
    $scope.limpaPersonagem = function(){

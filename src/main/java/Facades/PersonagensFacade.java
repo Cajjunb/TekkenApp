@@ -36,6 +36,13 @@ public class PersonagensFacade {
         return this.servPersonagens.mostra();
     }
     
+    @Path("/golpes")
+    @POST
+    public PersonagensDTO executaGetLazy(PersonagensDTO pdto){
+        return this.servPersonagens.executaGetLazy(pdto);
+    }
+    
+    
     @POST
     public boolean executaPost(PersonagensDTO personagemdto){
         return this.servPersonagens.executaPost(personagemdto);

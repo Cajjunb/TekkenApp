@@ -7,17 +7,23 @@ package modelos;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 import modelos.Personagens;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.inject.Named;
+import javax.persistence.EntityGraph;
 import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.Subgraph;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -126,6 +132,34 @@ public class PersonagensHelper implements Serializable,PersonagensInterface{
     public List<Personagens> getListaPersonagens() {
             Query q = em.createQuery("from Personagens");
             return q.getResultList();
+    }
+    
+    @Override
+    public Personagens getPersonagemComGolpes(Personagens personagem){
+        try{
+            this.transacao.begin();
+            Personagens personagemCompleto = this.em
+               .find(   Personagens.class,
+                        personagem.getId());
+            personagemCompleto.getGolpes().size();
+            this.transacao.commit();
+            return personagemCompleto;
+        } catch (NotSupportedException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SystemException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicMixedException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicRollbackException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalStateException ex) {
+            Logger.getLogger(PersonagensHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }

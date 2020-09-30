@@ -72,4 +72,10 @@ public class ServicosPersonagens  {
         
     }
     
+    public PersonagensDTO executaGetLazy(PersonagensDTO personagemdto){
+        Personagens registro = new Personagens(personagemdto);
+        PersonagensDTO pDTO = new PersonagensDTO(this.helpChars.getPersonagemComGolpes(registro), true);
+        return pDTO;
+    }
+    
 }

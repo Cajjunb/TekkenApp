@@ -33,12 +33,17 @@ public class PersonagensDTO  implements Serializable{
         this.id = personagem.getId();
         this.nome = personagem.getNome();
         this.fotoUrl = personagem.getFotoUrl();
-//        this.golpes = new HashSet<GolpesDTO>();
-//        for(Golpes golpe : personagem.getGolpes()){
-//            this.golpes.add(new GolpesDTO(golpe));
-//        }
     }
-    
+     
+    public PersonagensDTO(Personagens personagem, boolean lazy){
+        this.id = personagem.getId();
+        this.nome = personagem.getNome();
+        this.fotoUrl = personagem.getFotoUrl();
+        this.golpes = new HashSet<GolpesDTO>();
+        for(Golpes golpe : personagem.getGolpes()){
+            this.golpes.add(new GolpesDTO(golpe));
+        }
+    }
     
     @Override
     public String toString() {

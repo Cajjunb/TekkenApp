@@ -66,10 +66,10 @@
                         <tr ng-show="personagensTabela.show == true"  ng-repeat-end="">
                             <td>
                                 <table>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>df+1</td>
-                                        <td>Mid Hook</td>
+                                    <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisa">
+                                        <td>{{golpesTabela.id}}</td>
+                                        <td>{{golpesTabela.input}}</td>
+                                        <td>{{golpesTabela.nome}}</td>
                                     </tr>
                                 </table>
                             </td>

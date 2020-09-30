@@ -16,4 +16,5 @@ public interface PersonagensInterface {
     boolean alterarPersonagem(Personagens personagem);
     boolean deletarPersonagem(Personagens personagem);
     List<Personagens> getListaPersonagens();
+    Personagens getPersonagemComGolpes(Personagens personagem);
 }
