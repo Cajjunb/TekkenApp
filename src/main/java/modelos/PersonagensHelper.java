@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.inject.Named;
-import utilidades.HibernateUtil;
 import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

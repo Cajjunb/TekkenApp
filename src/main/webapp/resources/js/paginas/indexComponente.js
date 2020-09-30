@@ -13,6 +13,10 @@ personagensModulo.controller('personagensController',function($scope, $http){
     $scope.listarPersonagens = function(){
         $http.get(urlPersonagens).then(function(response){
             $scope.personagens = response.data;
+            $scope.personagens.forEach(function(valor,index,array){
+                array[index]['show'] = false;
+                console.log(valor);
+            });
         }).catch(function(erro){
             alert(erro.toString());
         });
@@ -24,8 +28,8 @@ personagensModulo.controller('personagensController',function($scope, $http){
     
    $scope.selecionaPersonagem = function(personagemSelecionado){
        $scope.personagem = personagemSelecionado;
-       $('linha'+scope.personagem.id)
-       
+       $('linha'+$scope.personagem.id);
+       $scope.personagem.show = !$scope.personagem.show;
    };
    
    $scope.limpaPersonagem = function(){
@@ -44,6 +48,7 @@ personagensModulo.controller('personagensController',function($scope, $http){
             $http.put(urlPersonagens,registroNovo).then(function(response){
                $scope.personagens.push($scope.personagem);
                $scope.limpaPersonagem();
+               $scope.listarPersonagens();
             }).catch(function(erro){
                 alert(erro.toString());
             });
@@ -56,6 +61,7 @@ personagensModulo.controller('personagensController',function($scope, $http){
             $http.post(urlPersonagens,registroNovo).then(function(response){
                $scope.personagens.push($scope.personagem);
                $scope.limpaPersonagem();
+               $scope.listarPersonagens();
             }).catch(function(erro){
                 alert(erro.toString());
             });
