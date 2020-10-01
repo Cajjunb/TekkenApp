@@ -40,6 +40,7 @@ personagensModulo.controller('personagensController',function($scope, $http){
                 var i = $scope.personagens.indexOf(personagemSelecionado);
                 $scope.personagens[i] = response.data;
                 $scope.personagens[i].show = true;
+                $scope.personagem = $scope.personagens[i];
             }).catch(function(erro){
                 alert(erro.toString());
             });
@@ -56,7 +57,8 @@ personagensModulo.controller('personagensController',function($scope, $http){
            var registroNovo = {
                 'id': $scope.personagem.id != null? $scope.personagem.id :'',
                 'nome': $scope.personagem.nome ,
-                'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: ''
+                'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: '',
+                'golpes' : $scope.personagem.golpes
             };
             console.log(registroNovo);
             $http.put(urlPersonagens,registroNovo).then(function(response){
@@ -70,7 +72,8 @@ personagensModulo.controller('personagensController',function($scope, $http){
            var registroNovo = {
                 'id':$scope.personagem.id,
                 'nome': $scope.personagem.nome,
-                'fotoUrl': $scope.personagem.foto
+                'fotoUrl': $scope.personagem.foto,
+                'golpes' : $scope.personagem.golpes
             };
             $http.post(urlPersonagens,registroNovo).then(function(response){
                $scope.personagens.push($scope.personagem);

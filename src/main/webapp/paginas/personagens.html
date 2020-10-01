@@ -64,8 +64,9 @@
                             </td>
                         </tr>
                         <tr ng-show="personagensTabela.show == true"  ng-repeat-end="">
-                            <td>
-                                <table>
+                            <td colspan="3">
+                                <div ng-show="personagensTabela.golpes.length <= 0" > Não Há Golpes Cadastrados para esse personagem</div>
+                                <table class="col-md-12">
                                     <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisa">
                                         <td>{{golpesTabela.id}}</td>
                                         <td>{{golpesTabela.input}}</td>

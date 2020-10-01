@@ -61,11 +61,13 @@ public class Personagens  implements Serializable{
         this.id = personagem.getId();
         this.nome = personagem.getNome();
         this.fotoUrl = personagem.getFotoUrl();
-//        HashSet<Golpes> golpesConvertidos = new HashSet<>();
-//        for(GolpesDTO golpedto : personagem.getGolpes()){
-//            golpesConvertidos.add(new Golpes(golpedto, this));
-//        }
-//        this.golpes = golpesConvertidos;
+        if(personagem.getGolpes() != null){
+            HashSet<Golpes> golpesConvertidos = new HashSet<>();
+            for(GolpesDTO golpedto : personagem.getGolpes()){
+                golpesConvertidos.add(new Golpes(golpedto, this));
+            }
+            this.golpes = golpesConvertidos;
+        }
     }
 
     @Override
