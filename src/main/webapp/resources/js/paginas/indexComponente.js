@@ -30,18 +30,20 @@ personagensModulo.controller('personagensController',function($scope, $http){
        $scope.personagem = personagemSelecionado;
        $('linha'+$scope.personagem.id);
        $scope.personagem.show = !$scope.personagem.show;
-        var registroDTO = {
-                'id': $scope.personagem.id ,
-                'nome': $scope.personagem.nome ,
-                'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: ''
-            };
-        $http.post(urlGolpes,registroDTO).then(function(response){
-            $scope.personagem = response.data;
-            console.log($scope.personagem);
-            console.log(response.data);
-        }).catch(function(erro){
-            alert(erro.toString());
-        });
+       if($scope.personagem.show){
+            var registroDTO = {
+                    'id': $scope.personagem.id ,
+                    'nome': $scope.personagem.nome ,
+                    'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: ''
+                };
+            $http.post(urlGolpes,registroDTO).then(function(response){
+                var i = $scope.personagens.indexOf(personagemSelecionado);
+                $scope.personagens[i] = response.data;
+                $scope.personagens[i].show = true;
+            }).catch(function(erro){
+                alert(erro.toString());
+            });
+        }
    };
    
    $scope.limpaPersonagem = function(){
