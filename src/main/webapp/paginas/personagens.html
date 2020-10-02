@@ -66,13 +66,40 @@
                         <tr ng-show="personagensTabela.show == true"  ng-repeat-end="">
                             <td colspan="3">
                                 <div ng-show="personagensTabela.golpes.length <= 0" > Não Há Golpes Cadastrados para esse personagem</div>
-                                <table class="col-md-12">
-                                    <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisa">
-                                        <td>{{golpesTabela.id}}</td>
-                                        <td>{{golpesTabela.input}}</td>
-                                        <td>{{golpesTabela.nome}}</td>
-                                    </tr>
-                                </table>
+                                    <div class="col-12">
+                                        <span class="col-3" >
+                                            <input  ng-model="pesquisagolpes.input" type="text" placeholder="input"/>
+                                        </span>
+                                        <span class="col-3" >
+                                            <input  ng-model="pesquisagolpes.blockframes" type="text" placeholder="block frames"/>
+                                        </span>
+                                        <span class="col-3">
+                                            <input  ng-model="pesquisagolpes.hitframes" type="text" placeholder="hit frames"/>
+                                        </span>
+                                        <span class="col-3">
+                                            <input  ng-model="pesquisagolpes.chframes" type="text" placeholder="ch frames"/>
+                                        </span>
+                                    </div>
+                                    <table class="col-md-12">
+                                        <thead>
+                                            <tr>
+                                                <td>id</td>
+                                                <td>input</td>
+                                                <td>block frames</td>
+                                                <td>hit frames</td>
+                                                <td>ch frames</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisagolpes">
+                                                <td>{{golpesTabela.id}}</td>
+                                                <td>{{golpesTabela.input}}</td>
+                                                <td>{{golpesTabela.blockframes}}</td>
+                                                <td>{{golpesTabela.hitframes}}</td>
+                                                <td>{{golpesTabela.chframes}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                             </td>
                         </tr>
                   </tbody>

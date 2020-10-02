@@ -18,6 +18,10 @@ public class GolpesDTO implements Serializable{
     private int id;
     private String nomeGolpe;
     private String input;
+    private int blockframes;
+    private int hitframes;
+    private int chframes;
+    
 
     public GolpesDTO(){}
     
@@ -25,6 +29,9 @@ public class GolpesDTO implements Serializable{
         this.id = golpe.getId();
         this.nomeGolpe = golpe.getNomeGolpe();
         this.input = golpe.getInput();
+        this.blockframes = golpe.getBlockframes();
+        this.hitframes = golpe.getHitframes();
+        this.chframes = golpe.getChframes();
     }
     
     public GolpesDTO(String nomeGolpe, String input, Personagens personagem) {
@@ -55,5 +62,30 @@ public class GolpesDTO implements Serializable{
     public void setInput(String input) {
         this.input = input;
     }
+
+    public int getBlockframes() {
+        return blockframes;
+    }
+
+    public void setBlockframes(int blockframes) {
+        this.blockframes = blockframes;
+    }
+
+    public int getHitframes() {
+        return hitframes;
+    }
+
+    public void setHitframes(int hitframes) {
+        this.hitframes = hitframes;
+    }
+
+    public int getChframes() {
+        return chframes;
+    }
+
+    public void setChframes(int chframes) {
+        this.chframes = chframes;
+    }
+    
     
 }

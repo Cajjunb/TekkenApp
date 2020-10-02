@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Leandro
  */
-@Entity(name="modelos.Golpes")
+@Entity(name="Golpes")
 @Table(name="golpes")
 @XmlRootElement
 public class Golpes implements Serializable{
@@ -29,10 +29,16 @@ public class Golpes implements Serializable{
     private int id;
     @Column(name="nome",length=100, nullable=false)
     private String nomeGolpe;
-    @Column(name="nome",length=100, nullable=false)
+    @Column(name="input",length=100, nullable=false)
     private String input;
+    @Column(name="blockframe", nullable=true)
+    private int blockframes;
+    @Column(name="hitframe", nullable=true)
+    private int hitframes;
+    @Column(name="chframe", nullable=true)
+    private int chframes;
+    
     @ManyToOne
-    @JoinColumn(name="fk_char",nullable=false)
     private Personagens personagem;
 
     public Golpes(){}
@@ -48,6 +54,9 @@ public class Golpes implements Serializable{
         this.nomeGolpe = golpedto.getNomeGolpe();
         this.input = golpedto.getInput();
         this.personagem = personagem;
+        this.blockframes = golpedto.getBlockframes();
+        this.hitframes = golpedto.getHitframes();
+        this.chframes = golpedto.getChframes();
     }
 
     public int getId() {
@@ -80,6 +89,30 @@ public class Golpes implements Serializable{
 
     public void setPersonagem(Personagens personagem) {
         this.personagem = personagem;
+    }
+
+    public int getBlockframes() {
+        return blockframes;
+    }
+
+    public void setBlockframes(int blockframes) {
+        this.blockframes = blockframes;
+    }
+
+    public int getHitframes() {
+        return hitframes;
+    }
+
+    public void setHitframes(int hitframes) {
+        this.hitframes = hitframes;
+    }
+
+    public int getChframes() {
+        return chframes;
+    }
+
+    public void setChframes(int chframes) {
+        this.chframes = chframes;
     }
     
 }
