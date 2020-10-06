@@ -22,9 +22,6 @@ import modelos.Personagens;
 import modelos.PersonagensDTO;
 
 
-//@Path("/personagens")
-//@Produces(MediaType.APPLICATION_JSON)
-//@Consumes(MediaType.APPLICATION_JSON)
 @Named
 public class ServicosPersonagens  {
     
