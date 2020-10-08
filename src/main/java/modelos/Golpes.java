@@ -49,11 +49,24 @@ public class Golpes implements Serializable{
         this.personagem = personagem;
     }
     
-    public Golpes(GolpesDTO golpedto, Personagens personagem){
+    //Construtor a partir de um golpe orfao (sem referencia para o personagem pai)
+    public Golpes(GolpesOrfaoDTO golpedto, Personagens personagem){
         this.id = golpedto.getId();
         this.nomeGolpe = golpedto.getNomeGolpe();
         this.input = golpedto.getInput();
         this.personagem = personagem;
+        this.blockframes = golpedto.getBlockframes();
+        this.hitframes = golpedto.getHitframes();
+        this.chframes = golpedto.getChframes();
+    }
+    
+    
+    //Construtor a partir de um golpe com referencia para o personagem pai
+    public Golpes(GolpesDTO golpedto){
+        this.id = golpedto.getId();
+        this.nomeGolpe = golpedto.getNomeGolpe();
+        this.input = golpedto.getInput();
+        this.personagem = golpedto.getPersonagem();
         this.blockframes = golpedto.getBlockframes();
         this.hitframes = golpedto.getHitframes();
         this.chframes = golpedto.getChframes();

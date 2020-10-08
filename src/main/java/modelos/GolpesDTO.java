@@ -21,6 +21,7 @@ public class GolpesDTO implements Serializable{
     private int blockframes;
     private int hitframes;
     private int chframes;
+    private Personagens personagem;
     
 
     public GolpesDTO(){}
@@ -85,6 +86,14 @@ public class GolpesDTO implements Serializable{
 
     public void setChframes(int chframes) {
         this.chframes = chframes;
+    }
+
+    public Personagens getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagens personagem) {
+        this.personagem = personagem;
     }
     
     

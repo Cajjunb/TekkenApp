@@ -23,7 +23,7 @@ public class PersonagensDTO  implements Serializable{
      private int id;
      private String  nome;
      private String fotoUrl;
-     private Set<GolpesDTO> golpes;
+     private Set<GolpesOrfaoDTO> golpes;
 
     public PersonagensDTO() {
     }
@@ -39,9 +39,9 @@ public class PersonagensDTO  implements Serializable{
         this.id = personagem.getId();
         this.nome = personagem.getNome();
         this.fotoUrl = personagem.getFotoUrl();
-        this.golpes = new HashSet<GolpesDTO>();
+        this.golpes = new HashSet<GolpesOrfaoDTO>();
         for(Golpes golpe : personagem.getGolpes()){
-            this.golpes.add(new GolpesDTO(golpe));
+            this.golpes.add(new GolpesOrfaoDTO(golpe));
         }
     }
     
@@ -76,11 +76,11 @@ public class PersonagensDTO  implements Serializable{
         this.fotoUrl = fotoUrl;
     }
 
-    public Set<GolpesDTO> getGolpes() {
+    public Set<GolpesOrfaoDTO> getGolpes() {
         return golpes;
     }
 
-    public void setGolpes(Set<GolpesDTO> golpes) {
+    public void setGolpes(Set<GolpesOrfaoDTO> golpes) {
         this.golpes = golpes;
     }
 

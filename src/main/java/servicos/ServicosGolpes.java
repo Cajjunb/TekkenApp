@@ -7,8 +7,10 @@ package servicos;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.FormParam;
 import modelos.Golpes;
 import modelos.GolpesDTO;
+import modelos.GolpesOrfaoDTO;
 import modelos.GolpesHelper;
 import modelos.Personagens;
 import modelos.PersonagensDTO;
@@ -26,10 +28,9 @@ public class ServicosGolpes {
     @Inject
     GolpesHelper helper;
     
-    public boolean executaPost(GolpesDTO golpedto, PersonagensDTO personagemdto){
+    public boolean executaPost(GolpesDTO golpedto){
         boolean resultado = false;
-        Personagens personagem = new Personagens(personagemdto);
-        Golpes golpe = new Golpes(golpedto,personagem);
+        Golpes golpe = new Golpes(golpedto);
         try{
             this.helper.salvarGolpe(golpe);
             resultado = true;
@@ -40,10 +41,9 @@ public class ServicosGolpes {
     }
     
     
-    public boolean executaPut(GolpesDTO golpedto, PersonagensDTO personagemdto){
+    public boolean executaPut(GolpesDTO golpedto){
         boolean resultado = false;
-        Personagens personagem = new Personagens(personagemdto);
-        Golpes golpe = new Golpes(golpedto,personagem);
+        Golpes golpe = new Golpes(golpedto);
         try{
             this.helper.alterarGolpe(golpe);
             resultado = true;
@@ -54,10 +54,9 @@ public class ServicosGolpes {
     }
     
     
-    public boolean executaDelete(GolpesDTO golpedto, PersonagensDTO personagemdto){
+    public boolean executaDelete(GolpesDTO golpedto){
         boolean resultado = false;
-        Personagens personagem = new Personagens(personagemdto);
-        Golpes golpe = new Golpes(golpedto,personagem);
+        Golpes golpe = new Golpes(golpedto);
         try{
             this.helper.deletarGolpe(golpe);
             resultado = true;

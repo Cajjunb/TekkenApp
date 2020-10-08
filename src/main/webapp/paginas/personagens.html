@@ -91,15 +91,61 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisagolpes">
+                                            <tr ng-repeat="golpesTabela in personagensTabela.golpes | filter:pesquisagolpes"
+                                                ng-click="selecionaGolpe(golpesTabela)">
                                                 <td>{{golpesTabela.id}}</td>
                                                 <td>{{golpesTabela.input}}</td>
                                                 <td>{{golpesTabela.blockframes}}</td>
                                                 <td>{{golpesTabela.hitframes}}</td>
                                                 <td>{{golpesTabela.chframes}}</td>
+                                                <td>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                
+                                <div class="card">
+                                <div class="card-body">                
+                                    <h1>Lista e cadastro de Golpes do {{personagemTabela.nome}}</h1>
+                                    <form class="form-horizontal">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2" for="nomeChar">ID</label>
+                                            <div class="col-sm-10">
+                                                <input readonly type="text" ng-model="golpeSelecionado.input" class="form-control" id="nomeChar"  placeholder="Nome Personagem">
+                                            </div>
+                                        </div>    
+                                        <div class="form-group row">
+                                            <label class="col-sm-2" for="blockFrames">Nome Personagem</label>
+                                            <div class="col-sm-10">
+                                                <input name="blockframes" required="Preencha o Campo" type="text" ng-model="golpeSelecionado.blockframes" class="form-control" id="nomeChar"  placeholder="Nome Personagem">
+                                            </div>
+                                        </div>    
+                                        <div class="form-group row">
+                                            <label class="col-sm-2" for="hitframes">Password</label>
+                                            <div class="col-sm-10">
+                                                <input name="hitframes" type="text" ng-model="golpeSelecionado.hitframes" class="form-control" id="fileChar" placeholder="Foto do Personagem">
+                                            </div>
+                                        </div>    
+                                        <div class="form-group row">
+                                            <label class="col-sm-2" for="fileChar">Password</label>
+                                            <div class="col-sm-10">
+                                                <input name="chframes" type="text" ng-model="golpeSelecionado.chframes" class="form-control" id="fileChar" placeholder="Foto do Personagem">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" ng-click="salvaGolpe()">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                  <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn btn-primary" ng-click="excluirGolpe()">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                                
                             </td>
                         </tr>
                   </tbody>
@@ -132,7 +178,7 @@
                     </div>
                     <button type="submit" ng-disabled="personagem.nome == null" 
                             ng-click="salvaPersonagem()" class="btn btn-primary">Cadastrar</button>
-                    <button type="submit" ng-click="limpaPersonagem()" class="btn btn-warning">Limpar</button>
+                    <button  type="submit" ng-click="limpaPersonagem()" class="btn btn-warning">Limpar</button>
                     <button type="submit" ng-click="excluirPersonagem()" class="btn btn-danger">Excluir</button>
                 </form>
             </div>

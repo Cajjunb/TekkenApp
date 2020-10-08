@@ -33,18 +33,18 @@ public class GolpesFacades {
     ServicosGolpes servico;
 
     @POST
-    public boolean executaPost(GolpesDTO golpedto, PersonagensDTO personagemdto){
-        return this.servico.executaPost(golpedto, personagemdto);
+    public boolean executaPost(GolpesDTO golpedto){
+        return this.servico.executaPost(golpedto);
     }
     
     @PUT
-    public boolean executaPut(GolpesDTO golpedto, PersonagensDTO personagemdto){
-        return this.servico.executaPut(golpedto, personagemdto);
+    public boolean executaPut(GolpesDTO golpedto){
+        return this.servico.executaPut(golpedto);
     }
     
     @DELETE
-    public boolean executaDelete(GolpesDTO golpedto, PersonagensDTO personagemdto){
-        return this.servico.executaDelete(golpedto, personagemdto);
+    public boolean executaDelete(GolpesDTO golpedto){
+        return this.servico.executaDelete(golpedto);
     }
     
 }
