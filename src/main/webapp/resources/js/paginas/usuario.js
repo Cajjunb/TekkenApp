@@ -5,5 +5,5 @@
  */
 
 (function () {
-    var app = angular.module('usuario', ["ngRoute"]);
+    var app = angular.module('usuario', []);
 }());

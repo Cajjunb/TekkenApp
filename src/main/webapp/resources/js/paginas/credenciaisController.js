@@ -5,11 +5,12 @@
  */
 
 
-(function(appMaster){
-    var aplicacaoController = function($scope){
-        $scope.mensagem = "Opa!";
-    };
-    appMaster.controller('aplicacaoController', aplicacaoController);
-    
+
+(function(app){
+   
+    var credenciaisController = function($scope, $http){
+        $scope.mensagem = "CREDENCIAIS!";
+    };   
+    app.controller("credenciaisController",credenciaisController);
     
 }(angular.module("aplicacao")));

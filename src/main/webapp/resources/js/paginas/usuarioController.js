@@ -8,7 +8,7 @@
 
 (function(app){
    
-    var usuarioController = function($scope, $http, $routeProvider){
+    var usuarioController = function($scope, $http,$routeParams){
         
        $scope.usuarioSelecionado = null;
        
@@ -21,4 +21,5 @@
     };   
     app.controller("usuarioController",usuarioController);
     
-}(angular.module("usuario")));
+//}(angular.module("usuario")));
+}(angular.module("aplicacao")));
