@@ -11,21 +11,28 @@
         $routeProvider
                 .when("/",{ 
                         templateUrl: 'paginas/usuarios.html',
-                        controller:'usuarioController'})
+                        controller:'usuarioController'
+                        })
                 .when("/personagens",{ 
                         templateUrl: 'paginas/personagens.html',
-                        controller:'personagensController'})      
+                        controller:'personagensController'
+                })      
                 .when("/credenciais",{ 
                         templateUrl: 'paginas/credenciais.html',
-                        controller:'credenciaisController'})
+                        controller:'credenciaisController',
+                        resolve:{
+                          filtroLogin: function(){
+                              var erro = new Error();
+                              erro.message = "ERRO DE AUTENTICAÇÃO";
+                              erro.name = "AUTERROR";
+//                              throw erro;
+                              return erro;
+                          }  
+                        }
+                    })
                 
                 .otherwise({redirectTo:'/'});
     };
-    
-//    appMaster.factory('servico',function(){
-//       var servicoInstancia = "STRING SERVIÇO";
-//       return servicoInstancia;
-//    });
     appMaster.config(config);
     appMaster.factory('notify', function() {
             var msgs = {
@@ -34,20 +41,5 @@
             };
             return msgs;
      });
-    //REGISTRANDO SERVICOS
-//    appMaster.factory('servico',function(){
-//       this.data = {
-//                nome: "NOME",
-//                Valor: 10
-//       };
-//       this.getData = function(){
-//           return this.dataServico;
-//       };
-//       this.setData = function(dataArg){
-//           this.data = dataArg ;
-//       };
-//       
-//       
-//       
-//    });
+  
 }());

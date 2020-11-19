@@ -5,9 +5,11 @@
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/GolpesHelper.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/Facades/PersonagensFacade.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/PersonagensInterface.java
+/home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/UsuarioDTO.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/servicos/ServicosPersonagens.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/GolpesDTO.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/Golpes.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/GolpesOrfaoDTO.java
+/home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/Usuario.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/modelos/Personagens.java
 /home/leandro/BackupStefanini/NetBeansProjects/TekkenApp/src/main/java/servicos/ServicosGolpes.java
