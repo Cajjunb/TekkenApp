@@ -24,19 +24,12 @@ import servicos.ServicosUsuarios;
 public class UsuarioFacade {
     @POST
     @Path("/signin")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public UsuarioDTO executaPostLogin(@FormParam("nome") UsuarioDTO usuariodto){
+    public UsuarioDTO executaPostLogin(UsuarioDTO usuariodto){
         //EXECUTA HELPER e verifica se a senha é igual
-        return new ServicosUsuarios().executaPostCadastro(usuariodto);
+        return new ServicosUsuarios().executaPostLogin(usuariodto);
     }
     
-    @POST
-    @Path("/cadastra_usuario")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public boolean executaPostCadastro(@FormParam("nome") String nome, @FormParam("senha") String senha){
-        //EXECUTA HELPER E CADASTRA USUARIO
-        return false;
-    }
+   
     
     
 }

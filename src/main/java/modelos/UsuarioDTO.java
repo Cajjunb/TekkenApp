@@ -20,17 +20,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UsuarioDTO {
     private int id;
     private String nome;
-    private String passwordenc;
+    private String password;
 
+    public UsuarioDTO(){};
+    
     public UsuarioDTO(Usuario usuario){
         this.setId(usuario.getId()); 
         this.setNome(usuario.getNome());
-        this.setPasswordenc(usuario.getPasswordenc());
+        this.setPassword(usuario.getPassword());
     }
 
-    public UsuarioDTO(String nome, String passwordenc) {
+    public UsuarioDTO(String nome, String password) {
         this.nome = nome;
-        this.passwordenc = passwordenc;
+        this.password = password;
     }
     
     
@@ -51,12 +53,12 @@ public class UsuarioDTO {
         this.nome = nome;
     }
 
-    public String getPasswordenc() {
-        return passwordenc;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordenc(String passwordenc) {
-        this.passwordenc = passwordenc;
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

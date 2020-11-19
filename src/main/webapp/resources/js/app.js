@@ -13,6 +13,10 @@
                         templateUrl: 'paginas/usuarios.html',
                         controller:'usuarioController'
                         })
+                .when("/login",{ 
+                        templateUrl: 'paginas/login.html',
+                        controller:'loginController'
+                        })        
                 .when("/personagens",{ 
                         templateUrl: 'paginas/personagens.html',
                         controller:'personagensController'

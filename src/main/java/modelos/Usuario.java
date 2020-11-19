@@ -29,18 +29,20 @@ public class Usuario {
     private String nome;
     
     @Column(name="password",length=300, nullable=false)
-    private String passwordenc;
+    private String password;
 
+    public Usuario(){};
+    
     public Usuario(UsuarioDTO usuariodto){
         this.setId(usuariodto.getId()); 
         this.setNome(usuariodto.getNome());
-        this.setPasswordenc(usuariodto.getPasswordenc());
+        this.setPassword(usuariodto.getPassword());
     }
 
     public Usuario(int id, String nome, String passwordenc) {
         this.id = id;
         this.nome = nome;
-        this.passwordenc = passwordenc;
+        this.password = passwordenc;
     }
     
     
@@ -60,12 +62,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getPasswordenc() {
-        return passwordenc;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordenc(String passwordenc) {
-        this.passwordenc = passwordenc;
+    public void setPassword(String passwordenc) {
+        this.password = passwordenc;
     }
     
 }
