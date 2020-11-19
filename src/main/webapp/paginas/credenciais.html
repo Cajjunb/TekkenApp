@@ -4,10 +4,10 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-    <div>
-        <h2>OPA</h2>
+    <div ng-controller="credenciaisController">
+        <h2>Credenciais:</h2>
+        <h2>{{mensagemCredenciais}}</h2>
+        
+        <button ng-click="getServico()">Seta</button>
+        <button ng-click="">Printa</button>
     </div>
-
-<script>
-    console.log("CARREGUEI!")
-</script>

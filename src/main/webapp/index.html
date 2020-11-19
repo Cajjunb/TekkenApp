@@ -31,7 +31,7 @@
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
   </head>
-  <body>
+  <body ng-controller="aplicacaoController" >
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">Tekken App</a>
@@ -41,12 +41,12 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link"  href="#!usuarios">Usuarios <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./paginas/personagens.html">Frame Data</a>
+              <a class="nav-link" href="#!personagens">Personagens</a>
             </li><li class="nav-item">
-              <a class="nav-link" href="./paginas/usuarios.html">Usuarios</a>
+              <a class="nav-link" href="#!credenciais">Credenciais</a>
             </li>
           </ul>
           <!--form class="form-inline mt-2 mt-md-0">
@@ -57,29 +57,27 @@
       </nav>
     </header>
 
-    <main  ng-controller="aplicacaoController" role="main">
-      <div class="container marketing">
-          <ul>
-              <li><a href="#!usuarios">usuarios</a></li>
-              <li><a href="#!credenciais">credenciais</a></li>
-          </ul>
-          <h2>{{mensagem}}</h2>
-      </div><!-- /.container -->
-          <div ng-view>
-          </div>
-      
+    <main  role="main">
+        <div class="container marketing">
+            <h1>Template</h1>
+            <h2>{{mensagem}}</h2>
+            <div ng-view>
+            </div>
+        </div><!-- /.container -->
       <!-- FOOTER -->
-      <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
+        <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
     </main>
     <script src="resources/js/angular-1.8.0/angular.min.js" ></script>
     <script src="resources/js/angular-1.8.0/angular-route.min.js" ></script>
     <script src="resources/js/app.js" ></script>
     <script src="resources/js/appController.js" ></script>
     <script src="resources/js/paginas/usuarioController.js" ></script>
-    <script src="resources/js/paginas/credenciaisController.js" ></script>
+    <script src="resources/js/paginas/credenciaisController.js" ></script> 
+    <script src="resources/js/paginas/indexComponente.js" ></script>
+    <script src="resources/js/paginas/servicos.js" ></script>
     </body>
       
 </html>

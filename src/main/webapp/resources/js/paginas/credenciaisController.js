@@ -8,9 +8,16 @@
 
 (function(app){
    
-    var credenciaisController = function($scope, $http){
-        $scope.mensagem = "CREDENCIAIS!";
+    var credenciaisController = function(notify,$scope){
+        $scope.mensagemCredenciais = "CREDENCIAIS!";
+        
+        $scope.getServico = function(){
+            notify['nome'] = "Leo";
+//            $scope.mensagemCredenciais = servico;
+        };
+        
+        
     };   
-    app.controller("credenciaisController",credenciaisController);
+    app.controller("credenciaisController",['notify','$scope',credenciaisController]);
     
 }(angular.module("aplicacao")));

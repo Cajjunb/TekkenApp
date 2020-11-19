@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 
-(function(){
+(function(personagensModulo){
     
-    
-    var personagensModulo = angular.module('personagensModulo',[]);
 
     personagensModulo.controller('personagensController',function($scope, $http){
         urlPersonagens = 'http://localhost:8080/TekkenApp/rest/personagens';
@@ -170,7 +168,6 @@
            }
         };
 
-
     });
     
-}());
+}(angular.module('aplicacao')));

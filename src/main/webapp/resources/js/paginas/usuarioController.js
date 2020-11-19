@@ -8,7 +8,7 @@
 
 (function(app){
    
-    var usuarioController = function($scope, $http,$routeParams){
+    var usuarioController = function($scope, $http,$routeParams,notify){
         
        $scope.usuarioSelecionado = null;
        
@@ -17,9 +17,14 @@
        $scope.selecionaUsuario = function(usuario){
            $scope.usuarioSelecionado = usuario;
        };
+       
+       $scope.printaUsuario = function(){
+           console.log(notify);
+       }
+       
 
     };   
-    app.controller("usuarioController",usuarioController);
+    app.controller("usuarioController",['$scope','$http','$routeParams','notify',usuarioController]);
     
 //}(angular.module("usuario")));
 }(angular.module("aplicacao")));
