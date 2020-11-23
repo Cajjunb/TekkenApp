@@ -20,7 +20,7 @@
        
        $scope.printaUsuario = function(){
            console.log(notify);
-       }
+       };
        
 
     };   

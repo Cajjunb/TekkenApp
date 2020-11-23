@@ -16,7 +16,7 @@
             $http.get(urlPersonagens).then(function(response){
                 $scope.personagens = response.data;
                 $scope.personagens.forEach(function(valor,index,array){
-                    array[index]['show'] = false;
+                    array.index.show = false;
                 });
             }).catch(function(erro){
                 alert(erro.toString());
@@ -53,8 +53,9 @@
 
        $scope.salvaPersonagem = function(){
            console.log($scope.personagem);
+           var registroNovo;
            if("id" in  $scope.personagem){
-               var registroNovo = {
+               registroNovo = {
                     'id': $scope.personagem.id != null? $scope.personagem.id :'',
                     'nome': $scope.personagem.nome ,
                     'fotoUrl': $scope.personagem.foto != null?$scope.personagem.foto: '',
@@ -69,7 +70,7 @@
                     alert(erro.toString());
                 });
            }else{
-               var registroNovo = {
+               registroNovo = {
                     'id':$scope.personagem.id,
                     'nome': $scope.personagem.nome,
                     'fotoUrl': $scope.personagem.foto,

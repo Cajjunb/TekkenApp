@@ -1,160 +1,322 @@
-'use strict';
+// module.exports = function (grunt) {
+
+//     var srcDir = 'src';
+//     var buildDir = 'www';
+
+//     // configure the tasks
+//     grunt.initConfig({
+//         clean: {
+//             all: {
+//                 src: [buildDir]
+//             },
+//         },
+//         connect: {
+//             server: {
+//                 options: {
+//                     port: 8300,
+//                     // protocol: 'https',
+//                     base: [buildDir],
+//                     hostname: '*',
+//                     middleware: function (connect, options, middlewares) {
+//                         // inject a custom middleware
+//                         middlewares.unshift(function (req, res, next) {
+//                             res.setHeader('Access-Control-Allow-Origin', '*');
+//                             res.setHeader('Access-Control-Allow-Methods', '*');
+//                             //a console.log('foo') here is helpful to see if it runs
+//                             return next();
+//                         });
+
+//                         return middlewares;
+//                     }
+//                 }
+//             }
+//         },
+//         copy: {
+//             all: {
+//                 cwd: srcDir,
+//                 src: ['**', '!**/*-spec.js'],
+//                 dest: buildDir,
+//                 expand: true
+//             },
+//         },
+//         cssmin: {
+//             all: {
+//                 files: [{
+//                     expand: true,
+//                     cwd: srcDir,
+//                     src: '**/*.css',
+//                     dest: buildDir,
+//                     ext: '.min.css'
+//                 }]
+//             }
+//         },
+//         karma: {
+//             unit: {
+//                 configFile: 'karma.conf.js'
+//             }
+//         },
+//         htmllint: {
+//             all: {
+//                 options: {
+//                     force: true,
+//                     'id-class-style': false,
+//                     'attr-name-style': false,
+//                     'attr-req-value': false,
+//                     'img-req-alt' : false,
+//                     'img-req-src' : false,
+//                     'tag-bans': [],
+//                     'attr-bans' : []
+//                 },
+//                 src: [srcDir + '/**/*.html']
+//             }
+//         },
+//         jshint: {
+//             options: {
+//                 jshintrc: true,
+//             },
+//             jshintrc: '.jshintrc',
+//             // 'spec/**/*-spec.js'
+//             all: [srcDir + '/**/*.js', '!' + srcDir + '/**/scripts/livereload.js', '!'
+//              + srcDir + '/**/highcharts.js', '!'  + srcDir + '/**/jspdf.js']
+//         },
+//         // jshint: {
+//         //     options: {
+//         //         jshintrc: true,
+//         //     },
+//         //     all: [srcDir + '/**/*.js', '!' + srcDir + '/**/scripts/livereload.js', '!' + srcDir + '/**/*-spec.js', '!' + srcDir + '/app/spas/directive/highcharts.js']
+//         // },
+//         strip_code: {
+//             options: {
+//                 blocks: [{
+//                     start_block: '/* start-test-block */',
+//                     end_block: '/* end-test-block */'
+//                 }, {
+//                     start_block: '<!-- start-html-test-code -->',
+//                     end_block: '<!-- end-html-test-code -->'
+//                 }]
+//             },
+//             dist: {
+//                 src: buildDir + '/**/*.*'
+//             }
+//         },
+//         uglify: {
+//             all: {
+//                 files: [{
+//                     expand: true,
+//                     cwd: srcDir,
+//                     src: ['**/*.js', '!**/*-spec.js'],
+//                     dest: buildDir,
+//                     ext: '.min.js'
+//                 }]
+//             }
+//         },
+//         watch: {
+//             files: [srcDir + '/**'],
+//             tasks: ['build'],
+//             options: {
+//                 // A porta abaixo deve casar com a porta descrita na página html
+//                 // //localhost:35729/livereload.js
+//                 livereload: {
+//                     port: 9000,
+//                     key: grunt.file.read('ssl/livereload.key'),
+//                     cert: grunt.file.read('ssl/livereload.crt')
+//                 }
+//             }
+//         },
+//     });
+
+//     // load the tasks
+//     grunt.loadNpmTasks('grunt-contrib-clean');
+//     grunt.loadNpmTasks('grunt-contrib-connect');
+//     grunt.loadNpmTasks('grunt-contrib-copy');
+//     grunt.loadNpmTasks('grunt-contrib-cssmin');
+//     grunt.loadNpmTasks('grunt-contrib-jshint');
+//     grunt.loadNpmTasks('grunt-contrib-uglify');
+//     grunt.loadNpmTasks('grunt-contrib-watch');
+//     grunt.loadNpmTasks('grunt-htmllint');
+//    grunt.loadNpmTasks('grunt-karma');
+//     grunt.loadNpmTasks('grunt-strip-code');
+
+//     // define the tasks
+//     grunt.registerTask(
+//         'build',
+//         // karma
+//         'Compila todos os assets e copia os arquivos para o diretório de build.', ['clean', 'jshint', 'htmllint', 'karma', 'copy', 'cssmin', 'uglify']
+//     );
+
+//     grunt.registerTask(
+//         'default',
+//         'Observa o projeto por mudanças, automaticamente contrói e executa o servidor.',
+//         ['build', 'connect', 'watch']
+//     );
+
+//     grunt.registerTask(
+//         'dist',
+//         'Gera o projeto em sua versão final removendo eventuais códigos de desenvolvimento.',
+//         ['build', 'strip_code']
+//     );
+//     grunt.registerTask(
+//         'test',
+//         'Executa os testes', ['jshint', 'karma']
+//     );
+// };
 
 module.exports = function (grunt) {
 
-    // Load grunt tasks automatically
-    require('load-grunt-tasks')(grunt);
+    var srcDir = 'src';
+    var buildDir = 'www';
 
-    /*
-     *   Time how long grunt tasks take to run, this might be important when having complex builds that take forever.
-     *   For now just to show how fancy grunt is.
-     */
-    require('time-grunt')(grunt);
-
-    // init required configurations for each task.
+    // configure the tasks
     grunt.initConfig({
-
-            // Project settings
-            config: {
-                path: {
-                    webapp: {
-                        root: 'src/main/webapp'
-                    },
-                    temp: {
-                        root: 'temp'
-                    },
-                    build: {
-                        root: 'build'
-                    }
-                }
+        clean: {
+            all: {
+                src: [buildDir]
             },
-
-            // From grunt-contrib-clean
-            clean: {
-                build: [
-                    '<%= config.path.temp.root %>',
-                    '<%= config.path.build.root %>'
-                ]
-            },
-
-            // From grunt-bower-install-simple. Downloads the web dependencies.
-            "bower-install-simple": {
+        },
+        connect: {
+            server: {
                 options: {
-                    color:       true
-                },
-                "prod": {
-                    options: {
-                        production: true
+                    port: 8300,
+                    // protocol: 'https',
+                    base: buildDir,
+                    hostname: '*',
+                    middleware: function (connect, options, middlewares) {
+                        // inject a custom middleware
+                        middlewares.unshift(function (req, res, next) {
+                            res.setHeader('Access-Control-Allow-Origin', '*');
+                            res.setHeader('Access-Control-Allow-Methods', '*');
+                            //a console.log('foo') here is helpful to see if it runs
+                            return next();
+                        });
+
+                        return middlewares;
                     }
-                },
-                "dev": {
-                    options: {
-                        production: false
-                    }
-                }
-            },
-
-            // From grunt-wiredep. Automatically inject Bower components into the HTML file
-            wiredep: {
-                target: {
-                    src: '<%= config.path.webapp.root %>/index.html',
-                    ignorePath: '<%= config.path.webapp.root %>'
-                }
-            },
-
-            // From grunt-contrib-concat. This is usefull when we have more than one css file, not the case now...
-            /*
-            concat: {
-                styles: {
-                    src: [
-                        '<%= config.path.webapp.root %>/css/style.css',
-                    ],
-                    dest: '<%= config.path.temp.root %>/concat/css/application.css'
-                }
-            },
-            */
-
-            // From grunt-contrib-copy. Copies remaining files to places other tasks can use
-            copy: {
-                build: {
-                    files: [
-                        {
-                            src: '<%= config.path.webapp.root %>/index.html',
-                            dest: '<%= config.path.build.root %>/index.html'
-                        }
-                    ]
-                }
-            },
-
-            // From grunt-contrib-htmlmin. Minifies index.html file.
-            htmlmin: {
-                prod: {
-                    options: {
-                        collapseBooleanAttributes: true,
-                        collapseWhitespace: true,
-                        removeComments: true,
-                        removeCommentsFromCDATA: true,
-                        removeEmptyAttributes: true,
-                        removeOptionalTags: true,
-                        removeRedundantAttributes: true,
-                        useShortDoctype: true
-                    },
-                    files: [
-                        {
-                            expand: true,
-                            cwd: '<%= config.path.build.root %>',
-                            src: ['index.html'],
-                            dest: '<%= config.path.build.root %>'
-                        }
-                    ]
-                }
-            },
-
-            // From grunt-usemin. Reads HTML for usemin blocks to enable smart builds
-            useminPrepare: {
-                html: '<%= config.path.webapp.root %>/index.html',
-                options: {
-                    staging: '<%= config.path.temp.root %>',
-                    root: '<%= config.path.webapp.root %>',
-                    dest: '<%= config.path.build.root %>'
-                }
-            },
-
-            // From grunt-usemin.
-            usemin: {
-                html: '<%= config.path.build.root %>/index.html'
-            },
-
-            // From grunt-contrib-uglify.
-            uglify: {
-                options: {
-                    mangle: false
                 }
             }
-        }
+        },
+        copy: {
+            all: {
+                cwd: srcDir,
+                src: ['**', '!**/*-spec.js'],
+                dest: buildDir,
+                expand: true
+            },
+        },
+        cssmin: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: srcDir,
+                    src: '**/*.css',
+                    dest: buildDir,
+                    ext: '.min.css'
+                }]
+            }
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        },
+        htmllint: {
+            all: {
+                options: {
+                    force: true,
+                    'id-class-style': false,
+                    'attr-name-style': false,
+                    'attr-req-value': false,
+                    'img-req-alt' : false,
+                    'img-req-src' : false,
+                    'tag-bans': [],
+                    'attr-bans' : []
+                },
+                src: [srcDir + '/**/*.html']
+            }
+        },
+        jshint: {
+            options: {
+                jshintrc: true,
+                ignores: [
+                  srcDir + '/main/webapp/resources/js/angular-1.8.0/**/*.js',
+                  srcDir + '/main/webapp/resources/js/angular-1.8.0/*.js',
+                  srcDir + '/main/webapp/assets/**/*.js' ]
+            },
+            jshintrc: '.jshintrc',
+            all: [srcDir + '/**/*.js', 'spec/**/*-spec.js', 
+                  '!' + srcDir + '/**/scripts/livereload.js', 
+                  '!' + srcDir + '/**/highcharts.js', 
+                  '!'  + srcDir + '/**/jspdf.js',]
+        },
+        strip_code: {
+            options: {
+                blocks: [{
+                    start_block: '/* start-test-block */',
+                    end_block: '/* end-test-block */'
+                }, {
+                    start_block: '<!-- start-html-test-code -->',
+                    end_block: '<!-- end-html-test-code -->'
+                }]
+            },
+            dist: {
+                src: buildDir + '/**/*.*'
+            }
+        },
+        uglify: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: srcDir,
+                    src: ['**/*.js', '!**/*-spec.js'],
+                    dest: buildDir,
+                    ext: '.min.js'
+                }]
+            }
+        },
+        watch: {
+            files: [srcDir + '/**'],
+            tasks: ['build'],
+            options: {
+                // A porta abaixo deve casar com a porta descrita na página html
+                // //localhost:35729/livereload.js
+                livereload: {
+                    port: 9000,
+                    key: grunt.file.read('ssl/livereload.key'),
+                    cert: grunt.file.read('ssl/livereload.crt')
+                }
+            }
+        },
+    });
+
+    // load the tasks
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-htmllint');
+    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-strip-code');
+
+    // define the tasks
+    grunt.registerTask(
+        'build',
+        'Compila todos os assets e copia os arquivos para o diretório de build.', ['clean', 'jshint', 'htmllint', 'karma', 'copy', 'cssmin', 'uglify']
     );
 
-    // Task: Build production version ready for deployment
-    grunt.registerTask('install', [
-        'clean:build',
-        'bower-install-simple',
-        //'concat:styles',
-        'wiredep',
-        'useminPrepare',
-        'concat:generated',
-        'cssmin',
-        'uglify',
-        'copy:build',
-        'usemin',
-        'htmlmin'
-    ]);
+    grunt.registerTask(
+        'default',
+        'Observa o projeto por mudanças, automaticamente contrói e executa o servidor.', ['build', 'connect', 'watch']
+    );
 
-    grunt.registerTask('process-resources', [
-        'bower-install-simple',
-        'wiredep',
-    ]);
+    grunt.registerTask(
+        'dist',
+        'Gera o projeto em sua versão final removendo eventuais códigos de desenvolvimento.', ['build', 'strip_code']
+    );
 
-    grunt.registerTask('default', [
-        'install'
-    ]);
+    grunt.registerTask(
+        'test',
+        'Executa os testes', ['jshint', 'karma']
+    )
 };

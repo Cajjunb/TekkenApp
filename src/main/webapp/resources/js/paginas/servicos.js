@@ -23,7 +23,7 @@
            data:data,
            getData:getData,
            setData:setData
-       }
+       };
     });
     
 }(angular.module('aplicacao')));

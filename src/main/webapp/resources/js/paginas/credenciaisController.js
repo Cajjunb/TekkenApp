@@ -12,7 +12,7 @@
         $scope.mensagemCredenciais = "CREDENCIAIS!";
         
         $scope.getServico = function(){
-            notify['nome'] = "Leo";
+            notify.nome = "Leo";
 //            $scope.mensagemCredenciais = servico;
         };
         
